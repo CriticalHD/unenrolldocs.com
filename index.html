@@ -7,307 +7,242 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #050505;
-      --fg: #e8e8e8;
-      --dim: rgba(255,255,255,0.45);
-      --border: rgba(255,255,255,0.15);
-      --green: #4ade80;
-      --yellow: #fbbf24;
-      --red: #f87171;
+      --bg: #050505; --fg: #e8e8e8;
+      --dim: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.15);
+      --green: #4ade80; --yellow: #fbbf24; --red: #f87171; --blue: #60a5fa;
     }
-
     html { background: var(--bg); }
+    body { min-height: 100vh; background: var(--bg); font-family: 'JetBrains Mono', monospace; color: var(--fg); overflow-x: hidden; }
 
-    body {
-      min-height: 100vh;
-      background: var(--bg);
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--fg);
-      overflow-x: hidden;
-    }
-
+    /* GRID — fixed but z-index behind everything */
     .grid {
-      position: fixed;
-      inset: -40px;
+      position: fixed; inset: -40px; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: moveGrid 12s linear infinite;
-      pointer-events: none;
-      z-index: 0;
     }
     @keyframes moveGrid { to { transform: translate(-40px,-40px); } }
 
+    /* CREDITS — fixed top, but won't scroll weirdly since pages scroll */
     .credits {
-      position: fixed;
-      top: 16px;
-      width: 100%;
-      text-align: center;
-      font-size: 0.7rem;
-      color: var(--dim);
-      letter-spacing: 2px;
-      z-index: 10;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      text-align: center; padding: 14px 0 10px;
+      font-size: 0.68rem; color: var(--dim); letter-spacing: 2px;
+      background: linear-gradient(to bottom, rgba(5,5,5,0.95) 60%, transparent);
       pointer-events: none;
     }
 
-    /* Pages scroll naturally */
-    .page {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 80px 24px 64px;
-      gap: 0;
-    }
-    .page.hidden { display: none; }
+    /* PAGES */
+    .page { display: none; position: relative; z-index: 1; min-height: 100vh; flex-direction: column; align-items: center; padding: 72px 22px 64px; }
+    .page.active { display: flex; }
 
-    h1, h2 {
-      text-align: center;
-      letter-spacing: 3px;
-      text-shadow: 0 0 30px rgba(255,255,255,0.22);
-      line-height: 1.2;
-    }
-    h1 { font-size: clamp(2rem, 10vw, 3.6rem); }
-    h2 { font-size: clamp(1.5rem, 8vw, 2.8rem); }
+    h1 { font-size: clamp(2rem, 10vw, 3.6rem); letter-spacing: 3px; text-align: center; text-shadow: 0 0 28px rgba(255,255,255,0.2); line-height: 1.2; }
+    h2 { font-size: clamp(1.5rem, 8vw, 2.8rem); letter-spacing: 3px; text-align: center; text-shadow: 0 0 22px rgba(255,255,255,0.18); line-height: 1.2; }
+    h3 { font-size: clamp(1.1rem, 5vw, 1.6rem); letter-spacing: 2px; text-align: center; }
 
-    .line {
-      width: 130px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-      margin: 22px auto 30px;
-      flex-shrink: 0;
-    }
+    .line { width: 130px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent); margin: 20px auto 28px; flex-shrink: 0; }
 
-    .desc {
-      font-size: clamp(0.76rem, 3.4vw, 0.9rem);
-      color: rgba(255,255,255,0.6);
-      line-height: 1.9;
-      text-align: center;
-      max-width: 520px;
-      width: 100%;
-    }
+    .desc { font-size: clamp(0.75rem, 3.4vw, 0.88rem); color: rgba(255,255,255,0.6); line-height: 1.9; text-align: center; max-width: 520px; width: 100%; }
 
-    /* Terminal drop-in */
+    /* TERMINAL */
     .terminal {
-      width: 100%;
-      max-width: 580px;
-      margin-top: 40px;
-      background: rgba(0,0,0,0.62);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.04);
-      opacity: 0;
-      transform: translateY(32px);
-      animation: dropIn 0.75s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+      width: 100%; max-width: 580px; margin-top: 36px;
+      background: rgba(0,0,0,0.65); border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; box-shadow: 0 12px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.04);
       flex-shrink: 0;
     }
-    @keyframes dropIn { to { opacity:1; transform:translateY(0); } }
-
     .t-bar {
-      background: rgba(255,255,255,0.04);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-shrink: 0;
+      background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border);
+      padding: 10px 14px; display: flex; align-items: center; gap: 7px;
     }
     .dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-    .dot.r { background: #ff5f57; }
-    .dot.y { background: #febc2e; }
-    .dot.g { background: #28c840; }
-    .t-label { margin-left: 6px; font-size: 0.68rem; color: var(--dim); letter-spacing: 1px; }
+    .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+    .t-label { margin-left: 6px; font-size: 0.67rem; color: var(--dim); letter-spacing: 1px; }
+    .t-body { padding: 18px 18px 22px; font-size: clamp(0.72rem, 3vw, 0.83rem); line-height: 1.95; }
 
-    .t-body {
-      padding: 18px 18px 22px;
-      font-size: clamp(0.74rem, 3.1vw, 0.85rem);
-      line-height: 2;
-    }
+    .tl { display: block; min-height: 1.95em; }
+    .tl.cmd::before { content: '$ '; color: var(--green); }
+    .tl.ok   { color: var(--green);  padding-left: 14px; }
+    .tl.warn { color: var(--yellow); padding-left: 14px; }
+    .tl.done { color: var(--green);  padding-left: 14px; font-weight: 700; }
 
-    .cmd         { display: block; color: var(--fg); }
-    .cmd::before { content: '$ '; color: var(--green); }
-    .out-ok      { display: block; color: var(--green);  padding-left: 14px; }
-    .out-warn    { display: block; color: var(--yellow); padding-left: 14px; }
-    .out-done    { display: block; color: var(--green);  padding-left: 14px; font-weight: 700; }
+    /* page 1 terminal — slides + types */
+    #p1terminal { opacity: 0; transform: translateY(28px); }
 
-    .sub-note {
-      margin-top: 28px;
-      font-size: 0.74rem;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-      font-style: italic;
-      line-height: 1.7;
-    }
-
+    /* BUTTONS */
     .btn {
-      margin-top: 52px;
-      padding: 15px 52px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      border: 1px solid rgba(255,255,255,0.55);
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      border-radius: 4px;
+      margin-top: 48px; padding: 14px 50px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; letter-spacing: 2px;
+      border: 1px solid rgba(255,255,255,0.55); background: transparent; color: white;
+      cursor: pointer; border-radius: 4px;
       transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+      -webkit-tap-highlight-color: transparent; flex-shrink: 0;
+    }
+    .btn:active, .btn:hover { background: white; color: black; box-shadow: 0 0 22px rgba(255,255,255,0.28); }
+
+    .back-btn {
+      margin-top: 36px; background: transparent; border: none;
+      color: var(--dim); font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; cursor: pointer; letter-spacing: 1px;
+      transition: color 0.2s; padding: 8px 0;
       -webkit-tap-highlight-color: transparent;
-      flex-shrink: 0;
     }
-    .btn:active, .btn:hover {
-      background: white; color: black;
-      box-shadow: 0 0 24px rgba(255,255,255,0.28);
-    }
+    .back-btn:active, .back-btn:hover { color: white; }
 
-    /* Page 2 input terminal */
+    /* ── PAGE 2: BOARD SEARCH ── */
     .input-terminal {
-      width: 100%;
-      max-width: 580px;
-      margin-top: 40px;
-      background: rgba(0,0,0,0.62);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.65);
-      flex-shrink: 0;
-      /* transition handled via JS */
+      width: 100%; max-width: 580px; margin-top: 36px;
+      background: rgba(0,0,0,0.65); border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; box-shadow: 0 12px 50px rgba(0,0,0,0.7);
+      opacity: 0; transform: translateY(28px); flex-shrink: 0;
     }
-
-    .input-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      row-gap: 6px;
-    }
-    .prompt {
-      color: var(--green);
-      font-size: clamp(0.7rem, 2.9vw, 0.82rem);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+    .input-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; row-gap: 6px; }
+    .prompt { color: var(--green); font-size: clamp(0.68rem, 2.8vw, 0.8rem); white-space: nowrap; flex-shrink: 0; }
     .board-input {
-      flex: 1;
-      min-width: 60px;
-      background: transparent;
-      border: none;
-      outline: none;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.74rem, 3.1vw, 0.85rem);
-      color: var(--fg);
-      caret-color: var(--green);
+      flex: 1; min-width: 60px; background: transparent; border: none; outline: none;
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.72rem, 3vw, 0.83rem);
+      color: var(--fg); caret-color: var(--green);
     }
     .board-input::placeholder { color: rgba(255,255,255,0.2); }
-
-    .cursor-blink {
-      display: inline-block;
-      width: 7px; height: 13px;
-      background: var(--green);
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
+    .cursor-blink { display: inline-block; width: 7px; height: 13px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; flex-shrink: 0; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    .suggest-row {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      min-height: 22px;
-    }
+    .suggest-row { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; min-height: 22px; }
     .tag {
-      padding: 3px 10px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      font-size: 0.68rem;
-      color: var(--dim);
-      cursor: pointer;
+      padding: 3px 10px; border: 1px solid var(--border); border-radius: 3px;
+      font-size: 0.67rem; color: var(--dim); cursor: pointer;
       transition: border-color 0.18s, color 0.18s;
       -webkit-tap-highlight-color: transparent;
     }
     .tag:active, .tag:hover { border-color: var(--green); color: var(--green); }
+    .tag.selected { border-color: var(--green); color: var(--green); background: rgba(74,222,128,0.08); }
 
-    .result-row { margin-top: 10px; font-size: 0.78rem; min-height: 18px; }
-    .result-found    { color: var(--green); }
-    .result-notfound { color: var(--red); }
-    .result-hint     { color: var(--dim); font-style: italic; }
+    .result-row { margin-top: 10px; font-size: 0.77rem; min-height: 18px; }
+    .r-found { color: var(--green); } .r-notfound { color: var(--red); } .r-hint { color: var(--dim); font-style: italic; }
 
-    .back-btn {
-      margin-top: 44px;
-      background: transparent;
-      border: none;
-      color: var(--dim);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      cursor: pointer;
-      letter-spacing: 1px;
-      transition: color 0.2s;
-      padding: 8px 0;
+    /* CONFIRM BUTTON */
+    .confirm-btn {
+      margin-top: 28px; padding: 14px 50px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; letter-spacing: 2px;
+      border: 1px solid rgba(255,255,255,0.2); background: transparent;
+      color: rgba(255,255,255,0.25); cursor: not-allowed; border-radius: 4px;
+      transition: all 0.3s ease; flex-shrink: 0;
       -webkit-tap-highlight-color: transparent;
     }
-    .back-btn:active, .back-btn:hover { color: white; }
+    .confirm-btn.ready {
+      border-color: var(--green); color: var(--green);
+      cursor: pointer; box-shadow: 0 0 16px rgba(74,222,128,0.2);
+    }
+    .confirm-btn.ready:active, .confirm-btn.ready:hover {
+      background: var(--green); color: black; box-shadow: 0 0 28px rgba(74,222,128,0.45);
+    }
+
+    .sub-note { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-align: center; font-style: italic; }
+
+    /* ── PAGE 3: DEVICE INFO ── */
+    .device-header {
+      text-align: center; margin-bottom: 6px;
+    }
+    .board-badge {
+      display: inline-block; padding: 4px 14px; border: 1px solid var(--green);
+      border-radius: 3px; font-size: 0.75rem; color: var(--green); letter-spacing: 2px;
+      margin-bottom: 18px; text-transform: uppercase;
+    }
+
+    .info-grid {
+      width: 100%; max-width: 580px; margin-top: 28px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      flex-shrink: 0;
+    }
+    .info-card {
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+      border-radius: 6px; padding: 14px 16px;
+    }
+    .info-card .label { font-size: 0.62rem; color: var(--dim); letter-spacing: 1.5px; margin-bottom: 6px; text-transform: uppercase; }
+    .info-card .value { font-size: 0.82rem; color: var(--fg); line-height: 1.4; }
+    .info-card .value.green { color: var(--green); }
+    .info-card .value.yellow { color: var(--yellow); }
+    .info-card .value.red { color: var(--red); }
+
+    .methods-container { width: 100%; max-width: 580px; margin-top: 20px; flex-shrink: 0; }
+    .methods-title { font-size: 0.7rem; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; margin-bottom: 12px; }
+
+    .method-card {
+      background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden; margin-bottom: 12px;
+    }
+    .method-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border); cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .method-name { font-size: 0.83rem; font-weight: 600; letter-spacing: 1px; }
+    .method-tag {
+      font-size: 0.62rem; padding: 2px 8px; border-radius: 2px;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .mt-easy { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+    .mt-med  { background: rgba(251,191,36,0.12); color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+    .mt-hard { background: rgba(248,113,113,0.12); color: var(--red);   border: 1px solid rgba(248,113,113,0.3); }
+
+    .method-body { padding: 14px 16px; font-size: 0.76rem; line-height: 1.8; color: rgba(255,255,255,0.7); display: none; }
+    .method-body.open { display: block; }
+    .method-body ol { margin-left: 18px; margin-top: 8px; }
+    .method-body li { margin-bottom: 6px; }
+    .method-body .dl-btn {
+      display: inline-block; margin-top: 12px; padding: 8px 20px;
+      border: 1px solid var(--blue); color: var(--blue); border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 1px;
+      text-decoration: none; transition: background 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .method-body .dl-btn:active, .method-body .dl-btn:hover { background: var(--blue); color: black; }
+    .chevron { font-size: 0.7rem; transition: transform 0.2s; }
+    .chevron.open { transform: rotate(180deg); }
+
+    .warning-box {
+      width: 100%; max-width: 580px; margin-top: 16px;
+      background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.3);
+      border-radius: 6px; padding: 12px 16px;
+      font-size: 0.72rem; color: var(--yellow); line-height: 1.7; flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
-
   <div class="grid"></div>
   <div class="credits">Crosbreaker • CriticalHD</div>
 
-  <!-- ═══════════════ PAGE 1 ═══════════════ -->
-  <div class="page" id="page1">
-
+  <!-- ═══════════ PAGE 1 ═══════════ -->
+  <div class="page active" id="page1">
     <h1>Unenrollment<br>Docs</h1>
     <div class="line"></div>
+    <p class="desc">Unenrollment removes enterprise MDM control from a managed ChromeOS device — restoring full user ownership and disabling enforced policies.</p>
 
-    <p class="desc">
-      Unenrollment removes enterprise MDM control from a managed ChromeOS
-      device — restoring full user ownership and disabling enforced policies.
-    </p>
-
-    <div class="terminal">
+    <div class="terminal" id="p1terminal">
       <div class="t-bar">
         <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
         <span class="t-label">chromeos — bash</span>
       </div>
-      <div class="t-body">
-        <span class="cmd">check_enrollment_status</span>
-        <span class="out-ok">ENROLLED: TRUE &nbsp;·&nbsp; POLICY: ENFORCED</span>
-        <span class="cmd">initiate_unenroll --force</span>
-        <span class="out-warn">⚠ modifying system-level protections</span>
-        <span class="out-warn">⚠ MDM policy enforcement will be disabled</span>
-        <span class="cmd">status</span>
-        <span class="out-done">✓ ENROLLED: FALSE &nbsp;·&nbsp; OWNER: USER</span>
-      </div>
+      <div class="t-body" id="p1body"></div>
     </div>
 
-    <p class="sub-note">
-      Covers enrollment mechanics, bypass techniques,<br>
-      board-specific methods &amp; associated risks.
+    <p class="desc" style="margin-top:28px; font-size:0.72rem; color:rgba(255,255,255,0.35); font-style:italic;">
+      Covers enrollment mechanics, bypass techniques,<br>board-specific methods &amp; associated risks.
     </p>
-
-    <button class="btn" onclick="goToPage2()">Continue →</button>
-
+    <button class="btn" id="continueBtn" style="opacity:0;pointer-events:none" onclick="showPage(2)">Continue →</button>
   </div>
 
-  <!-- ═══════════════ PAGE 2 ═══════════════ -->
-  <div class="page hidden" id="page2">
-
+  <!-- ═══════════ PAGE 2 ═══════════ -->
+  <div class="page" id="page2">
     <h2>Finding Your<br>Chromebook</h2>
     <div class="line"></div>
+    <p class="desc">Enter your ChromeOS board name below. Find it at <span style="color:var(--green)">chrome://version</span> → Platform.</p>
 
-    <p class="desc">
-      Enter your ChromeOS board name to get started.
-      Find it at <span style="color:var(--green)">chrome://version</span> under Platform.
-    </p>
-
-    <div class="input-terminal" id="inputTerminal" style="opacity:0;transform:translateY(32px);">
+    <div class="input-terminal" id="inputTerminal">
       <div class="t-bar">
         <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
         <span class="t-label">board-lookup — interactive</span>
@@ -315,114 +250,655 @@
       <div class="t-body">
         <div class="input-row">
           <span class="prompt">$ identify_board</span>
-          <input
-            class="board-input"
-            id="boardInput"
-            type="text"
-            placeholder="e.g. octopus, grunt…"
-            autocomplete="off"
-            spellcheck="false"
-            oninput="onBoardInput()"
-          />
+          <input class="board-input" id="boardInput" type="text" placeholder="e.g. octopus, grunt, dedede…" autocomplete="off" spellcheck="false" oninput="onBoardInput()"/>
           <span class="cursor-blink"></span>
         </div>
         <div class="suggest-row" id="suggestions"></div>
-        <div class="result-row" id="boardResult">
-          <span class="result-hint">Type your board name above…</span>
-        </div>
+        <div class="result-row" id="boardResult"><span class="r-hint">Type your board name above…</span></div>
       </div>
     </div>
 
-    <p class="sub-note" style="margin-top:20px;">500+ ChromeOS boards supported</p>
+    <p class="sub-note" style="margin-top:16px;">
+      <span id="boardCount"></span> ChromeOS boards supported
+    </p>
 
-    <button class="back-btn" onclick="goToPage1()">← back</button>
-
+    <button class="confirm-btn" id="confirmBtn" onclick="confirmBoard()">Confirm Board →</button>
+    <button class="back-btn" onclick="showPage(1)">← back</button>
   </div>
 
-  <script>
-    function goToPage2() {
-      document.getElementById('page1').classList.add('hidden');
-      document.getElementById('page2').classList.remove('hidden');
-      window.scrollTo(0,0);
-      const t = document.getElementById('inputTerminal');
-      t.style.transition = 'none';
-      t.style.opacity = '0';
-      t.style.transform = 'translateY(32px)';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        t.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
-        t.style.opacity = '1';
-        t.style.transform = 'translateY(0)';
-      }));
-      setTimeout(() => document.getElementById('boardInput').focus(), 500);
-    }
+  <!-- ═══════════ PAGE 3 ═══════════ -->
+  <div class="page" id="page3">
+    <div class="device-header">
+      <div class="board-badge" id="p3badge"></div>
+      <h3 id="p3title"></h3>
+    </div>
+    <div class="line"></div>
 
-    function goToPage1() {
-      document.getElementById('page2').classList.add('hidden');
-      document.getElementById('page1').classList.remove('hidden');
-      window.scrollTo(0,0);
-    }
+    <div class="info-grid" id="p3grid"></div>
 
-    const BOARDS = [
-      "asurada","atlas","auron","banjo","banon","barla","berknip","blooglet",
-      "bluebird","bob","brask","brya","buddy","burnet","caroline","cave",
-      "celes","chell","cherry","clapper","coachz","coral","corsola","cyan",
-      "daisy","dedede","delbin","dirinboz","drallion","dru","edgar","elm",
-      "endeavour","enguarde","eve","expresso","falco","fizz","fleex",
-      "gandof","gary","garg","glimmer","gnawty","gorman","gorg","grunt",
-      "guado","guybrush","hana","hatch","herobrine","homestar","hoho",
-      "horatio","hylia","jacuzzi","jecht","jerry","jinlon","jonquil",
-      "kalista","karma","kasumi","kasumi360","kefka","kevin","kindred",
-      "kingler","kip","koga","kohaku","kukui","lars","lazor","leona",
-      "leon","lick","link","lismore","lulu","lumpy","madoo","marina",
-      "mario","meowth","mimrock","minnie","mistral","monroe","mordin",
-      "munna","mushu","navi","ninja","nocturne","nyan","oak","octopus",
-      "ohm","orco","orion","oscar","panther","parrot","pawnee","pebble",
-      "peach","peppy","phaser","pi","poppy","pris","pyro","quawks",
-      "quiche","quillback","rammus","reef","relm","rikku","ripple","robo",
-      "rocky","romer","rowan","sabin","samus","sand","scarlet","scout",
-      "seaboard","setzer","shyvana","simipour","skate","snappy","snow",
-      "soraka","spring","squawks","stampy","starfish","stout","strago",
-      "stumpy","sumo","swanky","sweetberry","tails","tasha","tentacruel",
-      "terra","tidus","tiger","toad","trogdor","tulip","vell","veyron",
-      "vicuna","violet","viper","voxel","waddledoo","wahoo","wolf",
-      "woomax","xhatch","zako","zed","zork","zorba","zorro",
-      "lazor","limozeen","pompom","puff","dragonair","kingoftown",
-      "wormdingler","mrbossian","mrbossian2","quackingstick",
-      "akemi","arcada","fleex","helios","morphius","palkia",
-      "sarien","syndra","vayne","volteer",
-      "damu","dojo","hayato","magneton","myst","tomato",
-      "felwinter","jelboz","jelboz64","lillipup","metaknight","nightfury",
-      "nipperkin","shredder","steelix","walrein","strongbad","primus",
-      "taeko","vilboz",
-    ].map(b=>b.toLowerCase()).filter((v,i,a)=>a.indexOf(v)===i).sort();
+    <div class="methods-container">
+      <div class="methods-title">▸ Available Unenrollment Methods</div>
+      <div id="methodsList"></div>
+    </div>
 
-    function onBoardInput() {
-      const val = document.getElementById('boardInput').value.trim().toLowerCase();
-      const sugDiv = document.getElementById('suggestions');
-      const resDiv = document.getElementById('boardResult');
-      if (!val) {
-        sugDiv.innerHTML = '';
-        resDiv.innerHTML = '<span class="result-hint">Type your board name above…</span>';
-        return;
-      }
-      const matches = BOARDS.filter(b => b.startsWith(val));
-      const exact   = BOARDS.includes(val);
-      if (exact) {
-        resDiv.innerHTML = `<span class="result-found">✓ recognised: <strong>${val}</strong></span>`;
-      } else if (matches.length) {
-        resDiv.innerHTML = `<span class="result-hint">${matches.length} match${matches.length>1?'es':''}</span>`;
-      } else {
-        resDiv.innerHTML = `<span class="result-notfound">✗ not found — check chrome://version</span>`;
-      }
-      sugDiv.innerHTML = matches.slice(0,6).map(b =>
-        `<span class="tag" onclick="selectBoard('${b}')">${b}</span>`
-      ).join('');
-    }
+    <div class="warning-box">
+      ⚠ Unenrollment modifies system-level firmware protections. Proceed only if you own this device or have explicit permission. Data loss may occur.
+    </div>
 
-    function selectBoard(n) {
-      document.getElementById('boardInput').value = n;
-      onBoardInput();
+    <button class="back-btn" style="margin-top:28px;" onclick="showPage(2)">← choose different board</button>
+  </div>
+
+<script>
+// ─────────────────────────────────────────────
+// BOARD DATABASE — comprehensive ChromeOS boards
+// Fields: name, platform, arch, ec, methods[]
+// methods: 'sh1mmer'|'badrecovery'|'badbr0ker'|'baddieapple'|'sh1ttyoobe'|'pencil'|'legacy'
+// ─────────────────────────────────────────────
+const BOARD_DB = {
+  // ── ARM / Qualcomm Trogdor (kv4) ──
+  trogdor:     {label:"Trogdor",    platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  lazor:       {label:"Lazor",      platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  limozeen:    {label:"Limozeen",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  pompom:      {label:"Pompom",     platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  wormdingler: {label:"Wormdingler",platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  coachz:      {label:"Coachz",     platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  mrbossian:   {label:"Mr. Bossian",platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  quackingstick:{label:"Quackingstick",platform:"Qualcomm SC7180",arch:"ARM64",ec:"Cr50", methods:["sh1mmer","badrecovery","badbr0ker"]},
+  puff:        {label:"Puff",       platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  dragonair:   {label:"Dragonair",  platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  kingoftown:  {label:"King of Town",platform:"Qualcomm SC7180", arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  strongbad:   {label:"Strongbad",  platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  homestar:    {label:"Homestar",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+
+  // ── MTK / ARM Asurada/Cherry ──
+  asurada:  {label:"Asurada",  platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  cherry:   {label:"Cherry",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50",  methods:["baddieapple","sh1ttyoobe","badbr0ker"]},
+  corsola:  {label:"Corsola",  platform:"MediaTek MT8186",  arch:"ARM64", ec:"Cr50",  methods:["baddieapple","sh1ttyoobe","badbr0ker"]},
+  hayato:   {label:"Hayato",   platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  dojo:     {label:"Dojo",     platform:"MediaTek MT8186",  arch:"ARM64", ec:"Cr50",  methods:["sh1ttyoobe","badbr0ker"]},
+  tomato:   {label:"Tomato",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50",  methods:["baddieapple","sh1ttyoobe","badbr0ker"]},
+  magneton: {label:"Magneton", platform:"MediaTek MT8186",  arch:"ARM64", ec:"Cr50",  methods:["sh1ttyoobe","badbr0ker"]},
+  damu:     {label:"Damu",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50",  methods:["baddieapple","sh1ttyoobe"]},
+  myst:     {label:"Myst",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50",  methods:["baddieapple","sh1ttyoobe","badbr0ker"]},
+
+  // ── Intel Hatch (gen10) ──
+  hatch:    {label:"Hatch",    platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  kohaku:   {label:"Kohaku",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  helios:   {label:"Helios",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  jinlon:   {label:"Jinlon",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  morphius: {label:"Morphius", platform:"AMD Ryzen (Dali)",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  dratini:  {label:"Dratini",  platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+
+  // ── Intel Volteer (gen11/12) ──
+  volteer:  {label:"Volteer",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  voxel:    {label:"Voxel",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  voema:    {label:"Voema",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  volta:    {label:"Volta",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  volet:    {label:"Volet",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  vorlage:  {label:"Vorlage",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  syndra:   {label:"Syndra",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  sarien:   {label:"Sarien",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  vayne:    {label:"Vayne",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  palkia:   {label:"Palkia",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  fleex:    {label:"Fleex",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  drallion: {label:"Drallion", platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  arcada:   {label:"Arcada",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  akemi:    {label:"Akemi",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+
+  // ── Intel Brya (Alder Lake) ──
+  brya:     {label:"Brya",     platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  felwinter:{label:"Felwinter",platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  primus:   {label:"Primus",   platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  taeko:    {label:"Taeko",    platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  craask:   {label:"Craask",   platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  crota:    {label:"Crota",    platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  nissa:    {label:"Nissa",    platform:"Intel Alder Lake N",arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  brask:    {label:"Brask",    platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  lismore:  {label:"Lismore",  platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  dirinboz: {label:"Dirinboz", platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  berknip:  {label:"Berknip",  platform:"Intel Alder Lake",  arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+
+  // ── AMD Guybrush / Skyrim ──
+  guybrush: {label:"Guybrush", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  skyrim:   {label:"Skyrim",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  vilboz:   {label:"Vilboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  nipperkin:{label:"Nipperkin",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  jelboz:   {label:"Jelboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  jelboz64: {label:"Jelboz64", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+  kasumi360:{label:"Kasumi360",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50",  methods:["baddieapple","sh1ttyoobe","pencil"]},
+
+  // ── AMD Rex / Geralt ──
+  rex:      {label:"Rex",      platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50",  methods:["baddieapple","pencil"]},
+  geralt:   {label:"Geralt",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50",  methods:["baddieapple","pencil"]},
+  staryu:   {label:"Staryu",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50",  methods:["baddieapple","pencil"]},
+
+  // ── Intel Dedede (Jasper Lake) ──
+  dedede:   {label:"Dedede",   platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  metaknight:{label:"Metaknight",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", methods:["sh1mmer","badrecovery","badbr0ker"]},
+  waddledoo:{label:"Waddledoo",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  shredder: {label:"Shredder", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  lillipup: {label:"Lillipup", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  nightfury:{label:"Nightfury",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+
+  // ── Intel Octopus (Gemini Lake) ──
+  octopus:  {label:"Octopus",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  blooglet: {label:"Blooglet", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  bobba:    {label:"Bobba",    platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  dood:     {label:"Dood",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  foob:     {label:"Foob",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  garg:     {label:"Garg",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  lick:     {label:"Lick",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  meowth:   {label:"Meowth",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  mimrock:  {label:"Mimrock",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  moonrock: {label:"Moonrock", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  nasher:   {label:"Nasher",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  orbatrix: {label:"Orbatrix", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  phaser360:{label:"Phaser360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  sparky:   {label:"Sparky",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  sparky360:{label:"Sparky360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  ampton:   {label:"Ampton",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+
+  // ── Intel Grunt (Apollo Lake) ──
+  grunt:    {label:"Grunt",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  barla:    {label:"Barla",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  careena:  {label:"Careena",  platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  kasumi:   {label:"Kasumi",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  treeya:   {label:"Treeya",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  nuwani:   {label:"Nuwani",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+
+  // ── Intel Coral (Apollo Lake) ──
+  coral:    {label:"Coral",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  astronaut:{label:"Astronaut",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  babymega: {label:"Babymega", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  babytiger:{label:"Babytiger",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  blacktip: {label:"Blacktip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  bruce:    {label:"Bruce",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  casta:    {label:"Casta",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  epaulette:{label:"Epaulette",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  guard:    {label:"Guard",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  laser:    {label:"Laser",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  lava:     {label:"Lava",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  nasher360:{label:"Nasher360",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  rabbid:   {label:"Rabbid",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  robo360:  {label:"Robo360",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  santa:    {label:"Santa",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  serpent:  {label:"Serpent",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  whitetip: {label:"Whitetip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+
+  // ── Intel Eve / Nocturne / Atlas ──
+  eve:      {label:"Eve",      platform:"Intel Kaby Lake Y", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  nocturne: {label:"Nocturne", platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  atlas:    {label:"Atlas",    platform:"Intel Whiskey Lake", arch:"x86_64",ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  rammus:   {label:"Rammus",   platform:"Intel Comet Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  samus:    {label:"Samus",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  shyvana:  {label:"Shyvana",  platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+
+  // ── Intel Kukui / Hana (MT8173) ──
+  kukui:    {label:"Kukui",    platform:"MediaTek MT8173",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  hana:     {label:"Hana",     platform:"MediaTek MT8173",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  kodama:   {label:"Kodama",   platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  kakadu:   {label:"Kakadu",   platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  kappa:    {label:"Kappa",    platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  fennel:   {label:"Fennel",   platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  flapjack: {label:"Flapjack", platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  krane:    {label:"Krane",    platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+
+  // ── Nami / Reef (KBL/AML) ──
+  nami:     {label:"Nami",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  akali:    {label:"Akali",    platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  bard:     {label:"Bard",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  ekko:     {label:"Ekko",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  sona:     {label:"Sona",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  pantheon: {label:"Pantheon", platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  veyron:   {label:"Veyron",   platform:"RK3288",            arch:"ARM",    ec:"H1",    methods:["legacy"]},
+  reef:     {label:"Reef",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  sand:     {label:"Sand",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  snappy:   {label:"Snappy",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  pyro:     {label:"Pyro",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  electro:  {label:"Electro",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+
+  // ── Cyan / Elm (Braswell) ──
+  cyan:     {label:"Cyan",     platform:"Intel Braswell",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  elm:      {label:"Elm",      platform:"Mediatek MT8173",   arch:"ARM64",  ec:"H1",    methods:["sh1mmer","legacy"]},
+  oak:      {label:"Oak",      platform:"MediaTek MT8173",   arch:"ARM64",  ec:"H1",    methods:["sh1mmer","legacy"]},
+  hana_8173:{label:"Hana(8173)",platform:"MediaTek MT8173",  arch:"ARM64",  ec:"H1",    methods:["legacy"]},
+  clapper:  {label:"Clapper",  platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  glimmer:  {label:"Glimmer",  platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  gnawty:   {label:"Gnawty",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  enguarde: {label:"Enguarde", platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  kip:      {label:"Kip",      platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  winky:    {label:"Winky",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  banjo:    {label:"Banjo",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  candy:    {label:"Candy",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  orco:     {label:"Orco",     platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  relm:     {label:"Relm",     platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  swanky:   {label:"Swanky",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+
+  // ── Auron / Tidus (Broadwell) ──
+  auron:    {label:"Auron",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  tidus:    {label:"Tidus",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  paine:    {label:"Paine",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  yuna:     {label:"Yuna",     platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  gandof:   {label:"Gandof",   platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  lulu:     {label:"Lulu",     platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  lars:     {label:"Lars",     platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+
+  // ── Falco / Peppy (Haswell) ──
+  falco:    {label:"Falco",    platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  peppy:    {label:"Peppy",    platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  leon:     {label:"Leon",     platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  wolf:     {label:"Wolf",     platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  monroe:   {label:"Monroe",   platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  tricky:   {label:"Tricky",   platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  mccloud:  {label:"Mccloud",  platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  panther:  {label:"Panther",  platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+
+  // ── Daisy / Peach (Exynos/Samsung) ──
+  daisy:    {label:"Daisy",    platform:"Samsung Exynos 5250",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+  snow:     {label:"Snow",     platform:"Samsung Exynos 5250",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+  spring:   {label:"Spring",   platform:"Samsung Exynos 5420",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+  peach:    {label:"Peach",    platform:"Samsung Exynos 5800",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+  pit:      {label:"Pit",      platform:"Samsung Exynos 5800",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+  pi:       {label:"Pi",       platform:"Samsung Exynos 5800",arch:"ARM",   ec:"H1",    methods:["legacy"]},
+
+  // ── Scarlet / Nyan (RK3399/TK1) ──
+  scarlet:  {label:"Scarlet",  platform:"RK3399",            arch:"ARM64",  ec:"Cr50",  methods:["sh1mmer","legacy"]},
+  nyan:     {label:"Nyan",     platform:"NVIDIA Tegra K1",   arch:"ARM",    ec:"H1",    methods:["legacy"]},
+  nyan_big: {label:"Nyan Big", platform:"NVIDIA Tegra K1",   arch:"ARM",    ec:"H1",    methods:["legacy"]},
+  nyan_blaze:{label:"Nyan Blaze",platform:"NVIDIA Tegra K1", arch:"ARM",    ec:"H1",    methods:["legacy"]},
+
+  // ── Other misc boards ──
+  bob:      {label:"Bob",      platform:"RK3399",            arch:"ARM64",  ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  kevin:    {label:"Kevin",    platform:"RK3399",            arch:"ARM64",  ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  caroline: {label:"Caroline", platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  cave:     {label:"Cave",     platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  chell:    {label:"Chell",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  edgar:    {label:"Edgar",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","legacy"]},
+  fizz:     {label:"Fizz",     platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  guado:    {label:"Guado",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  jecht:    {label:"Jecht",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  kalista:  {label:"Kalista",  platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  kefka:    {label:"Kefka",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  link:     {label:"Link",     platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  ninja:    {label:"Ninja",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  pebble:   {label:"Pebble",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  quawks:   {label:"Quawks",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  reks:     {label:"Reks",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  rikku:    {label:"Rikku",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  robo:     {label:"Robo",     platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  rocky:    {label:"Rocky",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  setzer:   {label:"Setzer",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  stout:    {label:"Stout",    platform:"Intel Ivy Bridge",  arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  strago:   {label:"Strago",   platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  sumo:     {label:"Sumo",     platform:"Intel Sandy Bridge",arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  terra:    {label:"Terra",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  ultima:   {label:"Ultima",   platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  zork:     {label:"Zork",     platform:"AMD Picasso/Dali",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  dalboz:   {label:"Dalboz",   platform:"AMD Picasso/Dali",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  dirinboz2:{label:"Dirinboz2",platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  ezkinil:  {label:"Ezkinil",  platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  gooey:    {label:"Gooey",    platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  morphius2:{label:"Morphius2",platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  woomax:   {label:"Woomax",   platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  steelix:  {label:"Steelix",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  tentacruel:{label:"Tentacruel",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", methods:["sh1mmer","badrecovery","badbr0ker"]},
+  walrein:  {label:"Walrein",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  madoo:    {label:"Madoo",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  banon:    {label:"Banon",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  burnet:   {label:"Burnet",   platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  expresso: {label:"Expresso", platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  hoho:     {label:"Hoho",     platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  jacuzzi:  {label:"Jacuzzi",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  jonquil:  {label:"Jonquil",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  kindred:  {label:"Kindred",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  kingler:  {label:"Kingler",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  bluebird: {label:"Bluebird", platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  buddy:    {label:"Buddy",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  celes:    {label:"Celes",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  dru:      {label:"Dru",      platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  endeavour:{label:"Endeavour",platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  gary:     {label:"Gary",     platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  gorman:   {label:"Gorman",   platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  gorg:     {label:"Gorg",     platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  jerry:    {label:"Jerry",    platform:"NVIDIA Tegra K1",   arch:"ARM",    ec:"H1",    methods:["legacy"]},
+  leona:    {label:"Leona",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  mario:    {label:"Mario",    platform:"Intel Sandy Bridge",arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  marina:   {label:"Marina",   platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  minnie:   {label:"Minnie",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  mistral:  {label:"Mistral",  platform:"Allwinner A64",     arch:"ARM64",  ec:"H1",    methods:["legacy"]},
+  mordin:   {label:"Mordin",   platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  munna:    {label:"Munna",    platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  mushu:    {label:"Mushu",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  navi:     {label:"Navi",     platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  oscar:    {label:"Oscar",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  parrot:   {label:"Parrot",   platform:"Intel Ivy Bridge",  arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  pawnee:   {label:"Pawnee",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  perseus:  {label:"Perseus",  platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  phaser:   {label:"Phaser",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  poppy:    {label:"Poppy",    platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  pris:     {label:"Pris",     platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  quiche:   {label:"Quiche",   platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  quillback:{label:"Quillback",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  ripple:   {label:"Ripple",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  romer:    {label:"Romer",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  rowan:    {label:"Rowan",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  rust:     {label:"Rust",     platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  sabin:    {label:"Sabin",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  scout:    {label:"Scout",    platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  seaboard: {label:"Seaboard", platform:"NVIDIA Tegra X1",   arch:"ARM64",  ec:"H1",    methods:["legacy"]},
+  simipour: {label:"Simipour", platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  skate:    {label:"Skate",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  spherion: {label:"Spherion", platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  stampy:   {label:"Stampy",   platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  starfish: {label:"Starfish", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  stumpy:   {label:"Stumpy",   platform:"Intel Sandy Bridge",arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  sweetberry:{label:"Sweetberry",platform:"Intel Kaby Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  tails:    {label:"Tails",    platform:"Intel Haswell",     arch:"x86_64", ec:"H1",    methods:["legacy"]},
+  tasha:    {label:"Tasha",    platform:"Intel Baytrail",    arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  tiger:    {label:"Tiger",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  toad:     {label:"Toad",     platform:"Intel Broadwell",   arch:"x86_64", ec:"H1",    methods:["sh1mmer","legacy"]},
+  tulip:    {label:"Tulip",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  violet:   {label:"Violet",   platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  viper:    {label:"Viper",    platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  wahoo:    {label:"Wahoo",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  wanderer: {label:"Wanderer", platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  xhatch:   {label:"Xhatch",   platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  zako:     {label:"Zako",     platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","badbr0ker"]},
+  zed:      {label:"Zed",      platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+  zorba:    {label:"Zorba",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery","legacy"]},
+  zorro:    {label:"Zorro",    platform:"AMD Cezanne",       arch:"x86_64", ec:"Cr50",  methods:["sh1mmer","badrecovery"]},
+};
+
+const BOARD_NAMES = Object.keys(BOARD_DB).sort();
+document.getElementById('boardCount').textContent = BOARD_NAMES.length + '+';
+
+// ── METHOD DEFINITIONS ──
+const METHODS = {
+  sh1mmer: {
+    name: "SH1MMER", difficulty: "easy", tag: "mt-easy",
+    desc: "Boot a modified shim image to unenroll. Works on most Cr50 boards.",
+    steps: [
+      "Find your board name and download the SH1MMER image from <code>dl.crosbreaker.dev</code>",
+      "Flash the .bin file to a USB drive using Chromebook Recovery Utility → Use local image",
+      "Enter recovery mode: hold <b>Esc + Refresh</b>, then press Power",
+      "On the recovery screen, press the same combo again, then plug in your USB",
+      "Navigate the SH1MMER menu and select <b>Un-Enroll</b>",
+      "Reboot — your Chromebook is now unenrolled"
+    ],
+    dlUrl: true
+  },
+  badrecovery: {
+    name: "BadRecovery", difficulty: "easy", tag: "mt-easy",
+    desc: "Modified recovery image with code execution. Best for v124 and below.",
+    steps: [
+      "Download the BadRecovery image for your board from <code>dl.crosbreaker.dev</code>",
+      "Flash to USB using Chromebook Recovery Utility",
+      "Enter recovery mode: <b>Esc + Refresh + Power</b>",
+      "Plug in USB — it will boot into BadRecovery automatically",
+      "Press <b>Esc + Refresh + Power</b> again to enter developer mode",
+      "Press <b>Ctrl+D</b> to confirm, then <b>Ctrl+D</b> on each warning screen",
+      "Complete setup with your personal Google account"
+    ],
+    dlUrl: true
+  },
+  badbr0ker: {
+    name: "Badbr0ker", difficulty: "medium", tag: "mt-med",
+    desc: "Br0ker injected into BadRecovery unverified. For keyrolled kv5 devices.",
+    steps: [
+      "Complete sh1ttyOOBE first to get out of managed OOBE",
+      "Download Badbr0ker prebuilt for your board from <code>dl.crosbreaker.dev</code>",
+      "Flash to USB, enter developer mode, then recover to USB",
+      "Once in the shell, connect to WiFi",
+      "Run: <code>curl -LO https://ba.crosbreaker.dev/br0ker.sh && sh br0ker.sh</code>",
+      "Wait for completion — your device will reboot unenrolled"
+    ],
+    dlUrl: true
+  },
+  baddieapple: {
+    name: "Baddieapple", difficulty: "medium", tag: "mt-med",
+    desc: "Code execution in developer mode miniOS for kv5/kv6 keyrolled boards.",
+    steps: [
+      "Build or download Baddieapple for your board",
+      "Flash to USB using dd, Rufus, or Chromebook Recovery Utility",
+      "Enter recovery mode and boot the USB",
+      "In the miniOS shell, connect to WiFi",
+      "Run: <code>curl -LO https://ba.crosbreaker.dev/recovery_selector.sh && sh recovery_selector.sh</code>",
+      "For unenrollment run: <code>curl -LO https://ba.crosbreaker.dev/br0ker.sh && sh br0ker.sh</code> (kv5 only)",
+      "Alternatively use Quicksilver payload for unenroll up to R143"
+    ],
+    dlUrl: false
+  },
+  sh1ttyoobe: {
+    name: "Sh1ttyOOBE", difficulty: "easy", tag: "mt-easy",
+    desc: "Bypasses managed OOBE loop on ChromeOS 133–137. Persistent method.",
+    steps: [
+      "On the 'Welcome to your Chromebook' screen, wait for the <b>Quick set up with Android</b> button",
+      "Press that button — do NOT press Get Started yet",
+      "Sign in with your school/org account",
+      "Sign out, then go through OOBE normally — Get Started → Next",
+      "At the sign-in screen, sign in with the same account",
+      "It will hang on 'Please wait' — press <b>Alt + Vol Up + X</b> or just restart",
+      "You're now on the lockscreen, unenrolled persistently until powerwash"
+    ],
+    dlUrl: false
+  },
+  pencil: {
+    name: "Pencil Method", difficulty: "hard", tag: "mt-hard",
+    desc: "Physical write-protect bypass for Ti50 boards. Requires opening the device.",
+    steps: [
+      "⚠ This method requires physically opening your Chromebook",
+      "Locate the write-protect screw or pad on the motherboard",
+      "Bridge the WP pads with a pencil tip (graphite = conductor) or remove the WP screw",
+      "Boot into recovery mode with WP disabled",
+      "Flash custom firmware or run unkeyroll to disable enrollment locks",
+      "Re-assemble and complete unenrollment via GBB flags"
+    ],
+    dlUrl: false
+  },
+  legacy: {
+    name: "Legacy / CRX Exploit", difficulty: "medium", tag: "mt-med",
+    desc: "Older exploit methods for EOL or pre-2019 boards.",
+    steps: [
+      "These boards are often at EOL and may not enforce firmware-level enrollment",
+      "Try enabling developer mode directly: <b>Esc + Refresh + Power</b>, then <b>Ctrl+D</b>",
+      "If blocked, use SH1MMER if a shim exists for your board",
+      "As a fallback, look for a leaked RMA shim on sh1mmer.me or crosbreaker Discord",
+      "Some very old boards can be unenrolled via Crosh exploit (ChromeOS ≤ v100)"
+    ],
+    dlUrl: false
+  }
+};
+
+// ── STATE ──
+let selectedBoard = null;
+
+// ── PAGE 1: TYPEWRITER ──
+const P1_LINES = [
+  {cls:"cmd",  text:"check_enrollment_status"},
+  {cls:"ok",   text:"ENROLLED: TRUE  ·  POLICY: ENFORCED"},
+  {cls:"cmd",  text:"initiate_unenroll --force"},
+  {cls:"warn", text:"⚠ modifying system-level protections"},
+  {cls:"warn", text:"⚠ MDM policy enforcement will be disabled"},
+  {cls:"cmd",  text:"status"},
+  {cls:"done", text:"✓ ENROLLED: FALSE  ·  OWNER: USER"},
+];
+
+function animatePage1() {
+  const term = document.getElementById('p1terminal');
+  const body = document.getElementById('p1body');
+  const btn  = document.getElementById('continueBtn');
+
+  // slide in terminal
+  term.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+  term.style.opacity = '1';
+  term.style.transform = 'translateY(0)';
+
+  let lineIdx = 0, charIdx = 0;
+  let currentSpan = null;
+
+  function nextChar() {
+    if (lineIdx >= P1_LINES.length) {
+      // done — show continue button
+      btn.style.transition = 'opacity 0.5s ease';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      return;
     }
-  </script>
+    const line = P1_LINES[lineIdx];
+    if (charIdx === 0) {
+      currentSpan = document.createElement('span');
+      currentSpan.className = 'tl ' + line.cls;
+      body.appendChild(currentSpan);
+    }
+    if (charIdx < line.text.length) {
+      currentSpan.textContent += line.text[charIdx];
+      charIdx++;
+      // faster for output lines, slower for commands
+      const delay = line.cls === 'cmd' ? 38 : 18;
+      setTimeout(nextChar, delay);
+    } else {
+      lineIdx++; charIdx = 0;
+      // pause between lines
+      const pause = line.cls === 'cmd' ? 320 : 80;
+      setTimeout(nextChar, pause);
+    }
+  }
+
+  setTimeout(nextChar, 600);
+}
+
+// ── NAVIGATION ──
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  window.scrollTo(0,0);
+
+  if (n === 2) {
+    const t = document.getElementById('inputTerminal');
+    t.style.transition = 'none';
+    t.style.opacity = '0'; t.style.transform = 'translateY(28px)';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      t.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+      t.style.opacity = '1'; t.style.transform = 'translateY(0)';
+    }));
+    setTimeout(() => document.getElementById('boardInput').focus(), 400);
+  }
+}
+
+// ── BOARD SEARCH ──
+function onBoardInput() {
+  const val = document.getElementById('boardInput').value.trim().toLowerCase();
+  const sugDiv = document.getElementById('suggestions');
+  const resDiv = document.getElementById('boardResult');
+  const confirmBtn = document.getElementById('confirmBtn');
+
+  selectedBoard = null;
+  confirmBtn.classList.remove('ready');
+
+  if (!val) {
+    sugDiv.innerHTML = '';
+    resDiv.innerHTML = '<span class="r-hint">Type your board name above…</span>';
+    return;
+  }
+
+  const matches = BOARD_NAMES.filter(b => b.startsWith(val));
+  const exact   = BOARD_NAMES.includes(val);
+
+  if (exact) {
+    selectedBoard = val;
+    confirmBtn.classList.add('ready');
+    resDiv.innerHTML = `<span class="r-found">✓ recognised: <strong>${BOARD_DB[val].label}</strong> — ${BOARD_DB[val].platform}</span>`;
+  } else if (matches.length) {
+    resDiv.innerHTML = `<span class="r-hint">${matches.length} match${matches.length>1?'es':''} — select one below</span>`;
+  } else {
+    resDiv.innerHTML = `<span class="r-notfound">✗ not found — check chrome://version → Platform</span>`;
+  }
+
+  sugDiv.innerHTML = matches.slice(0,8).map(b =>
+    `<span class="tag${b===selectedBoard?' selected':''}" onclick="selectBoard('${b}')">${b}</span>`
+  ).join('');
+}
+
+function selectBoard(n) {
+  document.getElementById('boardInput').value = n;
+  onBoardInput();
+}
+
+function confirmBoard() {
+  if (!selectedBoard) return;
+  buildPage3(selectedBoard);
+  showPage(3);
+}
+
+// ── PAGE 3 BUILDER ──
+function buildPage3(board) {
+  const data = BOARD_DB[board];
+  if (!data) return;
+
+  document.getElementById('p3badge').textContent = board.toUpperCase();
+  document.getElementById('p3title').textContent = data.label;
+
+  const ecColor = data.ec === 'Ti50' ? 'yellow' : (data.ec === 'Cr50' ? 'green' : 'dim');
+  const grid = document.getElementById('p3grid');
+  grid.innerHTML = `
+    <div class="info-card">
+      <div class="label">Platform</div>
+      <div class="value">${data.platform}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Architecture</div>
+      <div class="value">${data.arch}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Security Chip</div>
+      <div class="value ${ecColor}">${data.ec}</div>
+    </div>
+    <div class="info-card">
+      <div class="label">Methods Available</div>
+      <div class="value green">${data.methods.length} method${data.methods.length!==1?'s':''}</div>
+    </div>
+  `;
+
+  const list = document.getElementById('methodsList');
+  list.innerHTML = '';
+  data.methods.forEach((mKey, i) => {
+    const m = METHODS[mKey];
+    if (!m) return;
+    const card = document.createElement('div');
+    card.className = 'method-card';
+    const dlHtml = m.dlUrl
+      ? `<a class="dl-btn" href="https://dl.crosbreaker.dev/recovery-images/${board}" target="_blank">↓ Download Recovery Image</a>`
+      : '';
+    const stepsHtml = m.steps.map((s,i) => `<li>${s}</li>`).join('');
+    card.innerHTML = `
+      <div class="method-header" onclick="toggleMethod(this)">
+        <span class="method-name">${m.name}</span>
+        <span style="display:flex;align-items:center;gap:8px;">
+          <span class="method-tag ${m.tag}">${m.difficulty}</span>
+          <span class="chevron">▾</span>
+        </span>
+      </div>
+      <div class="method-body${i===0?' open':''}">
+        <p>${m.desc}</p>
+        <ol>${stepsHtml}</ol>
+        ${dlHtml}
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function toggleMethod(header) {
+  const body = header.nextElementSibling;
+  const chev = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+// ── INIT ──
+window.addEventListener('load', () => {
+  animatePage1();
+});
+</script>
 </body>
 </html>
