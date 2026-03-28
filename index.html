@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unenrollment Docs</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
 
+    /* Animated HEX GRID */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml;utf8,
+        <svg xmlns='http://www.w3.org/2000/svg' width='60' height='52' viewBox='0 0 60 52'>
+          <polygon points='30,1 59,15 59,37 30,51 1,37 1,15'
+            fill='none'
+            stroke='rgba(255,255,255,0.15)'
+            stroke-width='1'/>
+        </svg>");
+      background-size: 60px 52px;
+      opacity: 0.6;
+      animation: moveGrid 40s linear infinite;
+    }
+
+    /* Glow overlay */
+    body::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes moveGrid {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-60px, -52px);
+      }
+    }
+
+    h1 {
+      position: relative;
+      font-size: 3.5rem;
+      letter-spacing: 3px;
+      z-index: 1;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4),
+                   0 0 20px rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Unenrollment Docs</h1>
+</body>
+</html>
