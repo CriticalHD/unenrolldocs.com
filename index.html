@@ -16,12 +16,12 @@
       color: white;
       overflow: hidden;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-align: center;
     }
 
-    /* SQUARE GRID BACKGROUND */
+    /* GRID */
     .grid {
       position: fixed;
       width: 200%;
@@ -36,20 +36,28 @@
     }
 
     @keyframes moveGrid {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(-40px, -40px);
-      }
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-40px, -40px); }
     }
 
-    /* Content box */
+    /* CONTENT */
     .content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      max-width: 900px;
+      margin-top: 80px;
       padding: 20px;
+    }
+
+    /* CREDITS */
+    .credits {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 1px;
     }
 
     h1 {
@@ -59,9 +67,8 @@
       text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
 
-    /* Divider line */
     .line {
-      width: 200px;
+      width: 220px;
       height: 2px;
       background: white;
       margin: 20px auto;
@@ -73,25 +80,85 @@
       color: rgba(255,255,255,0.8);
       line-height: 1.6;
     }
+
+    /* TERMINAL BLOCK */
+    .terminal {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 15px;
+      margin: 25px 0;
+      text-align: left;
+      font-size: 0.95rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    }
+
+    .terminal::before {
+      content: "terminal";
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+
+    /* BUTTON */
+    .btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border: 1px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+    }
+
+    .btn:hover {
+      background: white;
+      color: black;
+      box-shadow: 0 0 15px white;
+    }
   </style>
 </head>
 <body>
 
   <div class="grid"></div>
 
+  <div class="credits">
+    Crosbreaker • CriticalHD
+  </div>
+
   <div class="content">
     <h1>Unenrollment Docs</h1>
     <div class="line"></div>
+
     <p>
       Unenrollment refers to the process of removing enterprise or administrative control 
       from a managed device. This typically involves bypassing or disabling enrollment 
       mechanisms enforced by system firmware or operating system policies.
-      <br><br>
-      These documents provide technical insight into how enrollment systems function, 
-      along with methods, limitations, and risks associated with modifying or interacting 
-      with those protections.
+    </p>
+
+    <div class="terminal">
+$ check_enrollment_status  
+ENROLLED: TRUE  
+
+$ initiate_unenroll --force  
+WARNING: modifying system protections  
+
+$ status  
+ENROLLED: FALSE
+    </div>
+
+    <p>
+      These documents explore how enrollment systems function, along with technical 
+      methods, limitations, and risks involved in interacting with these protections.
     </p>
   </div>
+
+  <button class="btn">Continue →</button>
 
 </body>
 </html>
