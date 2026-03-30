@@ -680,7 +680,7 @@ const KV_VERSION_MAP = {
   "4":   {note:"kv4 (keyrolled Cr50). SH1MMER will not boot. Use BadBr0ker (requires Sh1ttyOOBE first) or Quicksilver via Baddieapple."},
   "5":   {note:"kv5 (keyrolled Cr50/early Ti50). SH1MMER cannot boot. Baddieapple + Quicksilver (≤R142). Sh1ttyOOBE for R133–R137. br0ker works on kv5 only (≤R133)."},
   "5–6": {note:"kv5–6 (Ti50 / keyrolled). SH1MMER cannot boot. Baddieapple covers Quicksilver (≤R142) and Sh1ttyOOBE (R133–R137). br0ker only on kv5 (≤R133), NOT kv6."},
-  "6":   {note:"kv6 (Ti50, latest keyroll). SH1MMER and br0ker do NOT work. Use Baddieapple + Quicksilver (≤R142) or Pencil hardware WP bypass."},
+  "6":   {note:"kv6 (Ti50, latest keyroll). SH1MMER and br0ker do NOT work. Use Baddieapple + Quicksilver (≤R142) or Sh1ttyExec + Badh."},
 };
 
 const BOARD_NAMES = Object.keys(BOARD_DB).sort();
@@ -759,18 +759,38 @@ const METHODS = {
     ],
     dlUrl: false
   },
-  sh1ttyoobe: {
-    name: "Sh1ttyOOBE / Sh1ttyExec", difficulty: "easy", tag: "mt-easy",
-    desc: "Bypasses the managed OOBE enrollment loop on ChromeOS 133–137 without any USB or hardware. A persistent session method (lasts until powerwash). Usually used as a prerequisite for Badbr0ker or Quicksilver on keyrolled devices.",
-    compat: "✓ All managed boards · ChromeOS v133–v137-v143 · No USB required",
+  sh1ttyexec: {
+    name: "Sh1ttyExec", difficulty: "easy", tag: "mt-easy",
+    desc: "Triggers a race condition during enrollment to temporarily set block_devmode=0 in VPD, allowing unverified recovery and code execution paths. Commonly used for BadRecovery/Quicksilver on keyrolled devices.",
+    compat: "✓ All managed boards · ChromeOS v138–v143 (patched in v143) · No USB required",
     steps: [
-      "At the 'Welcome to your Chromebook' screen, wait for the <b>Quick set up with Android</b> button to appear",
-      "Press that button — do NOT press Get Started yet",
-      "Sign in with your school / org account",
-      "Sign out, then go through OOBE normally — Get Started → Next → sign in with same account",
-      "It will hang on 'Please wait' — press <b>Alt + Vol Up + X</b> to escape, or just restart the device",
-      "You're now on the lockscreen. The device is unenrolled for this session",
-      "From here, enable developer mode and continue with Badbr0ker or Quicksilver for permanent unenrollment"
+      "Powerwash the device and begin enrollment from the OOBE screen",
+      "On the enrollment screen (NOT 'Please wait'), press <b>CTRL + ALT + SHIFT + R</b> to open the powerwash menu",
+      "Wait for the device to crash back to the OOBE screen",
+      "Start enrollment again",
+      "As soon as the enrollment screen appears (timing sensitive), press <b>ESC + Refresh + Power</b>",
+      "If done correctly, the device will reboot with <b>block_devmode = 0</b> temporarily set",
+      "Immediately enter recovery mode with <b>ESC + Refresh + Power</b>",
+      "Press <b>CTRL + D</b> then Enter, then re-enter recovery (<b>ESC + Refresh + Power</b>) and insert your USB",
+      "You can now boot unverified recovery images and proceed with BadRecovery or Quicksilver"
+    ],
+    dlUrl: false
+  },
+  sh1ttyoobe: {
+name: "Sh1ttyOOBE", difficulty: "medium", tag: "mt-med",
+desc: "Bypasses the managed OOBE enrollment loop on ChromeOS 133–137 without any USB or hardware. Provides a persistent unenrolled session until the next powerwash.",
+compat: "✓ All managed boards · ChromeOS v133–v137 · No USB required",
+steps: [
+  "Powerwash the device and wait on the 'Welcome to your Chromebook' screen",
+  "Wait for the <b>Quick set up with Android</b> button to appear (do NOT press Get Started if it is not visible)",
+  "Press <b>CTRL + ALT + SHIFT + R</b> and click Cancel",
+  "Select <b>Enter your Google account email and password</b> — it will prompt for network connection",
+  "Open Quick Settings from the bottom right and connect to Wi-Fi",
+  "Sign in with your school / org account, then immediately sign out",
+  "Go through OOBE normally — Get Started → Next → sign in with the same account",
+  "It will hang on 'Please wait' — press <b>Alt + Vol Up + X</b> or restart the device",
+  "You will land on the lockscreen; the device is now unenrolled for this session (persists until powerwash)",
+  "From here, you can proceed with developer mode or further methods for permanent unenrollment"
     ],
     dlUrl: false
   },
@@ -799,7 +819,7 @@ const METHODS = {
       "Bridge WP pads with a pencil tip (graphite is a conductor) or remove the WP screw",
       "Boot into recovery mode with WP now disabled",
       "Flash custom firmware or run unkeyroll to remove enrollment locks and keyroll",
-      "Set GBB flags using <code>futility gbb --set --flags=0x8009 /dev/sda</code> (see GBB tutorial in utilities below)",
+      "Set GBB flags using <code>futility gbb --set --flags=0xa0b1 /dev/sda</code> (see GBB tutorial in utilities below)",
       "Re-assemble. Now you can use Baddieapple, run br0ker, or proceed normally"
     ],
     dlUrl: false
@@ -827,7 +847,6 @@ const GBB_PROFILES = {
     steps: [
       "Disable hardware WP first using the Ti50 CCD method (see Disabling WP below)",
       "Once WP is off, boot into developer mode and open a root shell (VT2: <code>Ctrl+Alt+F2</code>, login: root)",
-      "Read current GBB flags first:<br><code>futility gbb --get --flags /dev/sda</code><br>or use the full firmware path: <code>futility gbb --get --flags /dev/mtd0</code>",
       "Write new flags (replace 0xa0b1 with your desired value):<br><code>futility gbb --set --flags=0xa0b1 /dev/sda</code>",
       "Reboot. GBB flags are now set in firmware."
     ]
@@ -839,19 +858,17 @@ const GBB_PROFILES = {
       "Disable hardware WP by disconnecting the battery (see Disabling WP below)",
       "Boot into developer mode and open a root shell (VT2: <code>Ctrl+Alt+F2</code>, login: root)",
       "Confirm WP is off: <code>flashrom --wp-status</code> should show WP disabled",
-      "Read current GBB flags:<br><code>futility gbb --get --flags /dev/sda</code>",
       "Write new flags:<br><code>futility gbb --set --flags=0xa0b1 /dev/sda</code>",
       "Reboot. Flags take effect on next boot."
     ]
   },
   H1: {
-    note: "H1 (legacy) EC — WP is controlled by battery connection. Very easy to disable. Use futility to read/write GBB after WP is off.",
+    note: "H1 (legacy) EC — WP is controlled by battery connection. Very easy to disable. Use futility to write GBB after WP is off.",
     recommended: "0xa0b1",
     steps: [
       "Disconnect the battery to disable hardware WP (see Disabling WP below)",
       "Boot into developer mode and open a root shell (VT2: <code>Ctrl+Alt+F2</code>, login: root)",
-      "Read current GBB flags:<br><code>futility gbb --get --flags /dev/sda</code>",
-      "Write new flags:<br><code>futility gbb --set --flags=0xa0b1 /dev/sda</code>",
+      "Write new flags:<br><code>futility gbb --set --flags=0xa0b1 /dev/sda</code>"
       "Reconnect battery, reboot normally."
     ]
   }
@@ -863,7 +880,7 @@ let selectedBoard = null;
 const P1_LINES = [
   {cls:"cmd",  text:"check_enrollment_status"},
   {cls:"ok",   text:"ENROLLED: TRUE  ·  ADMIN POLICIES: ACTIVE"},
-  {cls:"cmd",  text:"initiate_unenroll --bypass-fwmp"},
+  {cls:"cmd",  text:"initiate device_management_client --bypass-fwmp"},
   {cls:"warn", text:"⚠ modifying system-level protections"},
   {cls:"warn", text:"⚠ admin restrictions will be removed"},
   {cls:"cmd",  text:"status"},
@@ -1070,7 +1087,7 @@ function buildUtilities(board, data) {
         <p>DAUB prevents ChromeOS from auto-updating by blocking the update check at the depthcharge (bootloader) level. Unlike OS-level update toggles which can be overridden by admin policy, DAUB operates below the OS.</p>
         <h4>How to use</h4>
         <p>Run from a root shell (VT2 or crosh → shell → sudo su):</p>
-        <div class="code-block">curl -sSL https://crosbreaker.dev/daub.sh | sudo bash</div>
+        <div class="code-block">curl -sSL https://b2.crosbreaker.dev/file/crosbreaker/CDN/daub.sh | sudo bash</div>
         <div class="note-box">DAUB is also available as a payload inside SH1MMER: Payloads → DAUB.</div>
         <div class="warn-box">DAUB only prevents version bumps. If the device gets powerwashed or recovered, it will return to the latest version. Re-run DAUB after any recovery.</div>
         <a class="ext-link blue-link" href="https://crosbreaker.dev" target="_blank">↗ crosbreaker.dev</a>
@@ -1141,7 +1158,7 @@ function buildUtilities(board, data) {
           <li>Access to a root shell (SH1MMER, Baddieapple, or crosh)</li>
         </ol>
         <h4>Run unkeyroll</h4>
-        <div class="code-block">curl -sSL https://crosbreaker.dev/unkeyroll | sudo bash</div>
+        <div class="code-block">curl -sSL https://b2.crosbreaker.dev/file/crosbreaker/CDN/unkeyroll.sh | sudo bash</div>
         <div class="warn-box">Unkeyrolling reflashes GSC firmware. On Ti50 boards, WP must be physically disabled first. Do NOT interrupt this process — interrupting it can brick the GSC.</div>
       `
     },
@@ -1157,7 +1174,7 @@ function buildUtilities(board, data) {
         <h4>GitHub Sources</h4>
         <a class="ext-link blue-link" href="https://github.com/CoolElectronics/badrecovery" target="_blank">↗ BadRecovery</a>
         <a class="ext-link blue-link" href="https://github.com/crosbreaker/baddieapple" target="_blank">↗ Baddieapple</a>
-        <a class="ext-link blue-link" href="https://github.com/CriticalHD/Myscripts" target="_blank">↗ SAUB (CriticalHD)</a>
+        <a class="ext-link blue-link" href="https://github.com/CriticalHD/Myscripts" target="_blank">↗ SAUB</a>
         <h4>ChromeOS Version Lookup</h4>
         <a class="ext-link green-link" href="https://cros.tech/board/${board}" target="_blank">↗ cros.tech — ${board}</a>
         <a class="ext-link green-link" href="https://chromiumdash.appspot.com/serving-builds" target="_blank">↗ Chromium Dash</a>
@@ -1264,33 +1281,30 @@ function buildGbbBody(board, data, gbbProfile) {
     <table class="gbb-table">
       <tr><th>Flag</th><th>Hex</th><th>What it does</th></tr>
       <tr><td>DEV_SCREEN_SHORT_DELAY</td><td>0x0001</td><td>Shortens the dev mode boot delay from 30s to ~2s</td></tr>
-      <tr><td>DISABLE_FW_ROLLBACK_CHECK</td><td>0x0004</td><td>Disables firmware rollback version check (allows downgrades)</td></tr>
-      <tr><td>FORCE_DEV_SWITCH_ON</td><td>0x0008</td><td>Permanently forces dev mode on — cannot be turned off via UI</td></tr>
-      <tr><td>DISABLE_EC_SOFTWARE_SYNC</td><td>0x0040</td><td>Disables EC firmware verification on each boot</td></tr>
-      <tr><td>DISABLE_FWMP</td><td>0x8000</td><td>Disables FWMP (Firmware Management Parameters) — clears enrollment locks</td></tr>
+      <tr><td>FORCE_DEV_BOOT_USB</td><td>0x00010</td><td>Allows booting from an external USB even if dev_boot_usb=0</td></tr>
+      <tr><td>DISABLE_FW_ROLLBACK_CHECK</td><td>0x00020</td><td>Disables firmware rollback version check (allows downgrades)</td></tr>
+      <tr><td>FORCE_DEV_BOOT_ALTFW</td><td>0x0080</td><td>Enables booting from alternative firmware types</td></tr>
+      <tr><td>FORCE_UNLOCK_FASTBOOT</td><td>0x2000</td><td>Allows full fastbooting capability even in verified mode</td></tr>
+      <tr><td>DISABLE_FWMP</td><td>0x8000</td><td>Ignores FWMP (Firmware Management Parameters) — Clears enrollment locks</td></tr>
     </table>
     <h4>Recommended for ${board.toUpperCase()}</h4>
     <div class="success-box">
-      <code>${gbbProfile.recommended}</code> = DEV_SCREEN_SHORT_DELAY (0x0001) + FORCE_DEV_SWITCH_ON (0x0008) + DISABLE_FWMP (0x8000).<br>
-      This is the most useful combination for post-unenroll: forces dev mode on, clears FWMP, and speeds up the boot screen.
+      <code>${gbbProfile.recommended}</code> = (0x0001) + (0x0010) + (0x0020) + (0x0080) + (0x2000) + (0x8000).<br>
+      This is the most useful combination for post-unenroll.
     </div>
     <h4>Steps for ${data.ec} (${board})</h4>
     <ol>
       ${gbbProfile.steps.map(s=>`<li>${s}</li>`).join('')}
     </ol>
     <h4>Reading and writing GBB flags</h4>
-    <div class="code-block"># Read current flags (run as root in VT2)
-futility gbb --get --flags
 
 # Write new flags (WP must be off first)
 futility gbb -s --flash --flags=0xa0b1
 
 # Verify after writing
-futility gbb --get --flags=0xa0b1
+Enter recovery mode (Esc + Ref + Pwr) then press tab, at the bottom of debug info you should see GBB Flags set.
     <h4>Combining flags</h4>
     <p>Flags are combined with bitwise OR. For example: <code>0x8000 | 0x0008 | 0x0001 = 0x8009</code></p>
-    <div class="warn-box">FORCE_DEV_SWITCH_ON (0x0008) permanently forces dev mode. The device will always boot into dev mode until this flag is cleared. Do not set it if you intend to return to verified mode.</div>
-    <div class="warn-box">There is no set_gbb_flags.sh in /usr/share/vboot/bin on modern ChromeOS. The correct tool is <code>futility gbb</code>. Running a nonexistent script will do nothing.</div>
     <a class="ext-link blue-link" href="https://docs.mrchromebox.tech/docs/firmware/wp/disabling.html" target="_blank">↗ Mr. Chromebox — Full WP Disable Guide</a>
   `;
 }
