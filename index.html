@@ -441,159 +441,170 @@
 // ── BOARD DATABASE ──
 const BOARD_DB = {
   // ── ARM / Qualcomm Trogdor ──
-  trogdor:     {label:"Trogdor",     platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:["lazor","limozeen","pompom","wormdingler","coachz","mrbossian","quackingstick"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  lazor:       {label:"Lazor",       platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  limozeen:    {label:"Limozeen",    platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  pompom:      {label:"Pompom",      platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  wormdingler: {label:"Wormdingler", platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  coachz:      {label:"Coachz",      platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  mrbossian:   {label:"Mr. Bossian", platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  quackingstick:{label:"Quackingstick",platform:"Qualcomm SC7180",arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  puff:        {label:"Puff",        platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:["dragonair"], methods:["sh1mmer","badrecovery","quicksilver"]},
-  dragonair:   {label:"Dragonair",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  strongbad:   {label:"Strongbad",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:["kingoftown","homestar"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  kingoftown:  {label:"King of Town",platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  homestar:    {label:"Homestar",    platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  trogdor:     {label:"Trogdor",     platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:["lazor","limozeen","pompom","wormdingler","coachz","mrbossian","quackingstick"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  lazor:       {label:"Lazor",       platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  limozeen:    {label:"Limozeen",    platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  pompom:      {label:"Pompom",      platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  wormdingler: {label:"Wormdingler", platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  coachz:      {label:"Coachz",      platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  mrbossian:   {label:"Mr. Bossian", platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  quackingstick:{label:"Quackingstick",platform:"Qualcomm SC7180",arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  puff:        {label:"Puff",        platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:["dragonair"], methods:["sh1mmer","badrecovery","quicksilver"]},
+  dragonair:   {label:"Dragonair",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  strongbad:   {label:"Strongbad",   platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:["kingoftown","homestar"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  kingoftown:  {label:"King of Town",platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  homestar:    {label:"Homestar",    platform:"Qualcomm SC7180",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
   // ── MTK / ARM Asurada/Cherry ──
-  asurada:  {label:"Asurada",  platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:["hayato"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  cherry:   {label:"Cherry",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–6", subtypes:["tomato","myst","damu"], methods:["baddieapple","sh1ttyoobe","badbr0ker","quicksilver"]},
-  corsola:  {label:"Corsola",  platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–6", subtypes:["magneton","dojo"], methods:["baddieapple","sh1ttyoobe","quicksilver"]},
-  hayato:   {label:"Hayato",   platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  dojo:     {label:"Dojo",     platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["sh1ttyoobe","baddieapple","quicksilver"]},
-  tomato:   {label:"Tomato",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5",   subtypes:[], methods:["baddieapple","sh1ttyoobe","badbr0ker","quicksilver"]},
-  magneton: {label:"Magneton", platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["sh1ttyoobe","baddieapple","quicksilver"]},
-  damu:     {label:"Damu",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5",   subtypes:[], methods:["baddieapple","sh1ttyoobe","quicksilver"]},
-  myst:     {label:"Myst",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","badbr0ker","quicksilver"]},
+  asurada:  {label:"Asurada",  platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:["hayato"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  cherry:   {label:"Cherry",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–7", subtypes:["tomato","myst","damu"], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","badbr0ker","quicksilver"]},
+  corsola:  {label:"Corsola",  platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–7", subtypes:["magneton","dojo"], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","quicksilver"]},
+  hayato:   {label:"Hayato",   platform:"MediaTek MT8192",  arch:"ARM64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  dojo:     {label:"Dojo",     platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["sh1ttyoobe","sh1ttyexec","baddieapple","quicksilver"]},
+  tomato:   {label:"Tomato",   platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","badbr0ker","quicksilver"]},
+  magneton: {label:"Magneton", platform:"MediaTek MT8186",  arch:"ARM64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["sh1ttyoobe","sh1ttyexec","baddieapple","quicksilver"]},
+  damu:     {label:"Damu",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","quicksilver"]},
+  myst:     {label:"Myst",     platform:"MediaTek MT8195",  arch:"ARM64", ec:"Cr50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","badbr0ker","quicksilver"]},
   // ── Intel Hatch (gen10) ──
-  hatch:    {label:"Hatch",    platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:["kohaku","helios","jinlon","dratini"], methods:["sh1mmer","badrecovery","quicksilver"]},
-  kohaku:   {label:"Kohaku",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  helios:   {label:"Helios",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  jinlon:   {label:"Jinlon",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  morphius: {label:"Morphius", platform:"AMD Ryzen (Dali)", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  dratini:  {label:"Dratini",  platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  hatch:    {label:"Hatch",    platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:["kohaku","helios","jinlon","dratini"], methods:["sh1mmer","badrecovery","quicksilver"]},
+  kohaku:   {label:"Kohaku",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  helios:   {label:"Helios",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  jinlon:   {label:"Jinlon",   platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  morphius: {label:"Morphius", platform:"AMD Ryzen (Dali)", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  dratini:  {label:"Dratini",  platform:"Intel Ice Lake",   arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
   // ── Intel Volteer (gen11/12 Tiger Lake) ──
-  volteer:  {label:"Volteer",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:["voxel","voema","volta","volet","vorlage","syndra","sarien","vayne","palkia","fleex","drallion","arcada","akemi","wahoo"], methods:["sh1mmer","badrecovery","quicksilver"]},
-  voxel:    {label:"Voxel",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  voema:    {label:"Voema",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  volta:    {label:"Volta",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  volet:    {label:"Volet",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  vorlage:  {label:"Vorlage",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  syndra:   {label:"Syndra",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  sarien:   {label:"Sarien",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  vayne:    {label:"Vayne",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  palkia:   {label:"Palkia",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  fleex:    {label:"Fleex",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  drallion: {label:"Drallion", platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  arcada:   {label:"Arcada",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  akemi:    {label:"Akemi",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  wahoo:    {label:"Wahoo",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  volteer:  {label:"Volteer",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:["voxel","voema","volta","volet","vorlage","syndra","sarien","vayne","palkia","fleex","drallion","arcada","akemi","wahoo"], methods:["sh1mmer","badrecovery","quicksilver"]},
+  voxel:    {label:"Voxel",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  voema:    {label:"Voema",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  volta:    {label:"Volta",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  volet:    {label:"Volet",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  vorlage:  {label:"Vorlage",  platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  syndra:   {label:"Syndra",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  sarien:   {label:"Sarien",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  vayne:    {label:"Vayne",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  palkia:   {label:"Palkia",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  fleex:    {label:"Fleex",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  drallion: {label:"Drallion", platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  arcada:   {label:"Arcada",   platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  akemi:    {label:"Akemi",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  wahoo:    {label:"Wahoo",    platform:"Intel Tiger Lake",  arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
   // ── Intel Brya (Alder Lake) ──
-  brya:     {label:"Brya",     platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:["felwinter","primus","taeko","craask","crota","brask","lismore","dirinboz","berknip"], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  felwinter:{label:"Felwinter", platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  primus:   {label:"Primus",   platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  taeko:    {label:"Taeko",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  craask:   {label:"Craask",   platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  crota:    {label:"Crota",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  nissa:    {label:"Nissa",    platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  brask:    {label:"Brask",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  lismore:  {label:"Lismore",  platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  dirinboz: {label:"Dirinboz", platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  berknip:  {label:"Berknip",  platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
+  brya:     {label:"Brya",     platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:["felwinter","primus","taeko","craask","crota","brask","lismore","dirinboz","berknip"], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  felwinter:{label:"Felwinter", platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  primus:   {label:"Primus",   platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  taeko:    {label:"Taeko",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  craask:   {label:"Craask",   platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  crota:    {label:"Crota",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  nissa:    {label:"Nissa",    platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:["pujjo","pujjo1e","pujjocento","pujjoga","pujjogatwin","pujjolo","pujjoniru","pujjoquince","pujjoteen","pujjoteenlo"], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  brask:    {label:"Brask",    platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  lismore:  {label:"Lismore",  platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  dirinboz: {label:"Dirinboz", platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  berknip:  {label:"Berknip",  platform:"Intel Alder Lake",   arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  // ── Nissa subtypes (pujjo family) ──
+  pujjo:       {label:"Pujjo",       platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjo1e:     {label:"Pujjo1e",     platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjocento:  {label:"Pujjocento",  platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjoga:     {label:"Pujjoga",     platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjogatwin: {label:"Pujjogatwin", platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjolo:     {label:"Pujjolo",     platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjoniru:   {label:"Pujjoniru",   platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjoquince: {label:"Pujjoquince", platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjoteen:   {label:"Pujjoteen",   platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  pujjoteenlo: {label:"Pujjoteenlo", platform:"Intel Alder Lake N", arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
   // ── AMD Guybrush / Skyrim ──
-  guybrush: {label:"Guybrush", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:["vilboz","nipperkin","jelboz","jelboz64","kasumi360"], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  skyrim:   {label:"Skyrim",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  vilboz:   {label:"Vilboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  nipperkin:{label:"Nipperkin",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  jelboz:   {label:"Jelboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  jelboz64: {label:"Jelboz64", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
-  kasumi360:{label:"Kasumi360",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–6", subtypes:[], methods:["baddieapple","sh1ttyoobe","pencil","quicksilver"]},
+  guybrush: {label:"Guybrush", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:["vilboz","nipperkin","jelboz","jelboz64","kasumi360"], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  skyrim:   {label:"Skyrim",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  vilboz:   {label:"Vilboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  nipperkin:{label:"Nipperkin",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  jelboz:   {label:"Jelboz",   platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  jelboz64: {label:"Jelboz64", platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
+  kasumi360:{label:"Kasumi360",platform:"AMD Mendocino",     arch:"x86_64", ec:"Ti50", kv:"5–7", subtypes:[], methods:["baddieapple","sh1ttyoobe","sh1ttyexec","pencil","quicksilver"]},
   // ── AMD Rex / Geralt ──
-  rex:      {label:"Rex",      platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6",   subtypes:["staryu"], methods:["baddieapple","pencil","quicksilver"]},
-  geralt:   {label:"Geralt",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6",   subtypes:[], methods:["baddieapple","pencil","quicksilver"]},
-  staryu:   {label:"Staryu",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6",   subtypes:[], methods:["baddieapple","pencil","quicksilver"]},
+  rex:      {label:"Rex",      platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6–7", subtypes:["staryu"], methods:["baddieapple","sh1ttyexec","pencil","quicksilver"]},
+  geralt:   {label:"Geralt",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6–7", subtypes:[], methods:["baddieapple","sh1ttyexec","pencil","quicksilver"]},
+  staryu:   {label:"Staryu",   platform:"AMD Phoenix",       arch:"x86_64", ec:"Ti50", kv:"6–7", subtypes:[], methods:["baddieapple","sh1ttyexec","pencil","quicksilver"]},
   // ── Intel Dedede (Jasper Lake) ──
-  dedede:   {label:"Dedede",   platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:["metaknight","waddledoo","shredder","lillipup","nightfury","steelix","tentacruel","walrein","madoo","tiger","zako"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  metaknight:{label:"Metaknight",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  waddledoo:{label:"Waddledoo",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  shredder: {label:"Shredder", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  lillipup: {label:"Lillipup", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  nightfury:{label:"Nightfury",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  steelix:  {label:"Steelix",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  tentacruel:{label:"Tentacruel",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  walrein:  {label:"Walrein",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  madoo:    {label:"Madoo",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  tiger:    {label:"Tiger",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
-  zako:     {label:"Zako",     platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  dedede:   {label:"Dedede",   platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:["metaknight","waddledoo","shredder","lillipup","nightfury","steelix","tentacruel","walrein","madoo","tiger","zako"], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  metaknight:{label:"Metaknight",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  waddledoo:{label:"Waddledoo",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  shredder: {label:"Shredder", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  lillipup: {label:"Lillipup", platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  nightfury:{label:"Nightfury",platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  steelix:  {label:"Steelix",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  tentacruel:{label:"Tentacruel",platform:"Intel Jasper Lake",arch:"x86_64",ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  walrein:  {label:"Walrein",  platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  madoo:    {label:"Madoo",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  tiger:    {label:"Tiger",    platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
+  zako:     {label:"Zako",     platform:"Intel Jasper Lake", arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","badbr0ker","quicksilver"]},
   // ── Intel Octopus (Gemini Lake) ──
-  octopus:  {label:"Octopus",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:["blooglet","bobba","dood","foob","garg","lick","meowth","mimrock","moonrock","nasher","orbatrix","phaser360","sparky","sparky360","ampton"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  blooglet: {label:"Blooglet", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  bobba:    {label:"Bobba",    platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  dood:     {label:"Dood",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  foob:     {label:"Foob",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  garg:     {label:"Garg",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  lick:     {label:"Lick",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  meowth:   {label:"Meowth",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  mimrock:  {label:"Mimrock",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  moonrock: {label:"Moonrock", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  nasher:   {label:"Nasher",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  orbatrix: {label:"Orbatrix", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  phaser360:{label:"Phaser360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  sparky:   {label:"Sparky",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  sparky360:{label:"Sparky360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  ampton:   {label:"Ampton",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  octopus:  {label:"Octopus",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:["blooglet","bobba","dood","foob","garg","lick","meowth","mimrock","moonrock","nasher","orbatrix","phaser360","sparky","sparky360","ampton"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  blooglet: {label:"Blooglet", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  bobba:    {label:"Bobba",    platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  dood:     {label:"Dood",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  foob:     {label:"Foob",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  garg:     {label:"Garg",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  lick:     {label:"Lick",     platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  meowth:   {label:"Meowth",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  mimrock:  {label:"Mimrock",  platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  moonrock: {label:"Moonrock", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  nasher:   {label:"Nasher",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  orbatrix: {label:"Orbatrix", platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  phaser360:{label:"Phaser360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  sparky:   {label:"Sparky",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  sparky360:{label:"Sparky360",platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  ampton:   {label:"Ampton",   platform:"Intel Gemini Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
   // ── AMD Grunt ──
-  grunt:    {label:"Grunt",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:["barla","careena","kasumi","treeya","nuwani"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  barla:    {label:"Barla",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  careena:  {label:"Careena",  platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  kasumi:   {label:"Kasumi",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  treeya:   {label:"Treeya",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  nuwani:   {label:"Nuwani",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  grunt:    {label:"Grunt",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:["barla","careena","kasumi","treeya","nuwani"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  barla:    {label:"Barla",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  careena:  {label:"Careena",  platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  kasumi:   {label:"Kasumi",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  treeya:   {label:"Treeya",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  nuwani:   {label:"Nuwani",   platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
   // ── Intel Coral (Apollo Lake) ──
-  coral:    {label:"Coral",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:["astronaut","babymega","babytiger","blacktip","bruce","casta","epaulette","guard","laser","lava","rabbid","robo360","santa","serpent","whitetip","reks","jacuzzi","jonquil","kindred","kingler","phaser","quillback","starfish"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
-  astronaut:{label:"Astronaut",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  babymega: {label:"Babymega", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  babytiger:{label:"Babytiger",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  blacktip: {label:"Blacktip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  bruce:    {label:"Bruce",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  casta:    {label:"Casta",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  epaulette:{label:"Epaulette",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  guard:    {label:"Guard",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  laser:    {label:"Laser",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  lava:     {label:"Lava",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  nasher360:{label:"Nasher360",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  rabbid:   {label:"Rabbid",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  robo360:  {label:"Robo360",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  santa:    {label:"Santa",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  serpent:  {label:"Serpent",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  whitetip: {label:"Whitetip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  reks:     {label:"Reks",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  jacuzzi:  {label:"Jacuzzi",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  jonquil:  {label:"Jonquil",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  kindred:  {label:"Kindred",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  kingler:  {label:"Kingler",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  phaser:   {label:"Phaser",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  quillback:{label:"Quillback",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  starfish: {label:"Starfish", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  reef:     {label:"Reef",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:["sand","snappy","pyro","electro"], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  sand:     {label:"Sand",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  snappy:   {label:"Snappy",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  pyro:     {label:"Pyro",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  electro:  {label:"Electro",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  coral:    {label:"Coral",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:["astronaut","babymega","babytiger","blacktip","bruce","casta","epaulette","guard","laser","lava","rabbid","robo360","santa","serpent","whitetip","reks","jacuzzi","jonquil","kindred","kingler","phaser","quillback","starfish"], methods:["sh1mmer","badrecovery","br1ck","legacy","quicksilver"]},
+  astronaut:{label:"Astronaut",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  babymega: {label:"Babymega", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  babytiger:{label:"Babytiger",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  blacktip: {label:"Blacktip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  bruce:    {label:"Bruce",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  casta:    {label:"Casta",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  epaulette:{label:"Epaulette",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  guard:    {label:"Guard",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  laser:    {label:"Laser",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  lava:     {label:"Lava",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  nasher360:{label:"Nasher360",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  rabbid:   {label:"Rabbid",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  robo360:  {label:"Robo360",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  santa:    {label:"Santa",    platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  serpent:  {label:"Serpent",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  whitetip: {label:"Whitetip", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  reks:     {label:"Reks",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  jacuzzi:  {label:"Jacuzzi",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  jonquil:  {label:"Jonquil",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  kindred:  {label:"Kindred",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  kingler:  {label:"Kingler",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  phaser:   {label:"Phaser",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  quillback:{label:"Quillback",platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  starfish: {label:"Starfish", platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  reef:     {label:"Reef",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:["sand","snappy","pyro","electro"], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  sand:     {label:"Sand",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  snappy:   {label:"Snappy",   platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  pyro:     {label:"Pyro",     platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  electro:  {label:"Electro",  platform:"Intel Apollo Lake", arch:"x86_64", ec:"Cr50", kv:"1–6", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
   // ── Intel Eve / Nocturne / Nami / Atlas ──
-  eve:      {label:"Eve",      platform:"Intel Kaby Lake Y", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  nocturne: {label:"Nocturne", platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  atlas:    {label:"Atlas",    platform:"Intel Whiskey Lake", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  rammus:   {label:"Rammus",   platform:"Intel Comet Lake",  arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  shyvana:  {label:"Shyvana",  platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  nami:     {label:"Nami",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:["akali","bard","ekko","sona","pantheon"], methods:["sh1mmer","badrecovery","quicksilver"]},
-  akali:    {label:"Akali",    platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  bard:     {label:"Bard",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  ekko:     {label:"Ekko",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  sona:     {label:"Sona",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  pantheon: {label:"Pantheon", platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  fizz:     {label:"Fizz",     platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  ultima:   {label:"Ultima",   platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  // ── Intel Kukui / Hana (MediaTek) ──
+  eve:      {label:"Eve",      platform:"Intel Kaby Lake Y", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  nocturne: {label:"Nocturne", platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  atlas:    {label:"Atlas",    platform:"Intel Whiskey Lake", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  rammus:   {label:"Rammus",   platform:"Intel Comet Lake",  arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  shyvana:  {label:"Shyvana",  platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  nami:     {label:"Nami",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:["akali","bard","ekko","sona","pantheon"], methods:["sh1mmer","badrecovery","quicksilver"]},
+  akali:    {label:"Akali",    platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  bard:     {label:"Bard",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  ekko:     {label:"Ekko",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  sona:     {label:"Sona",     platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  pantheon: {label:"Pantheon", platform:"Intel Kaby Lake U", arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  fizz:     {label:"Fizz",     platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  ultima:   {label:"Ultima",   platform:"Intel Kaby Lake",   arch:"x86_64", ec:"Cr50", kv:"2–5", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  // ── Intel Kukui / Hana (MediaTek) — EOL ──
   kukui:    {label:"Kukui",    platform:"MediaTek MT8173",   arch:"ARM64", ec:"Cr50", kv:"1–2", subtypes:["hana","kodama","kakadu","kappa","fennel","flapjack","krane"], methods:["sh1mmer","badrecovery","legacy"]},
   hana:     {label:"Hana",     platform:"MediaTek MT8173",   arch:"ARM64", ec:"Cr50", kv:"1–2", subtypes:[], methods:["sh1mmer","badrecovery","legacy"]},
   kodama:   {label:"Kodama",   platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery"]},
@@ -602,20 +613,20 @@ const BOARD_DB = {
   fennel:   {label:"Fennel",   platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery"]},
   flapjack: {label:"Flapjack", platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery"]},
   krane:    {label:"Krane",    platform:"MediaTek MT8183",   arch:"ARM64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery"]},
-  // ── AMD Zork / Morphius ──
-  zork:     {label:"Zork",     platform:"AMD Picasso / Dali", arch:"x86_64", ec:"Cr50", kv:"2–4", subtypes:["dalboz","dirinboz2","ezkinil","gooey","woomax","zorro"], methods:["sh1mmer","badrecovery","quicksilver"]},
-  dalboz:   {label:"Dalboz",   platform:"AMD Picasso / Dali", arch:"x86_64", ec:"Cr50", kv:"2–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  dirinboz2:{label:"Dirinboz2",platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  ezkinil:  {label:"Ezkinil",  platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  gooey:    {label:"Gooey",    platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  woomax:   {label:"Woomax",   platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  zorro:    {label:"Zorro",    platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–4", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  // ── Skylake family ──
+  // ── AMD Zork / Cezanne ──
+  zork:     {label:"Zork",     platform:"AMD Picasso / Dali", arch:"x86_64", ec:"Cr50", kv:"2–6", subtypes:["dalboz","dirinboz2","ezkinil","gooey","woomax","zorro"], methods:["sh1mmer","badrecovery","quicksilver"]},
+  dalboz:   {label:"Dalboz",   platform:"AMD Picasso / Dali", arch:"x86_64", ec:"Cr50", kv:"2–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  dirinboz2:{label:"Dirinboz2",platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  ezkinil:  {label:"Ezkinil",  platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  gooey:    {label:"Gooey",    platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  woomax:   {label:"Woomax",   platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  zorro:    {label:"Zorro",    platform:"AMD Cezanne",        arch:"x86_64", ec:"Cr50", kv:"3–6", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
+  // ── Skylake family — EOL ──
   caroline: {label:"Caroline", platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:["cave","chell","burnet"], methods:["sh1mmer","badrecovery","quicksilver"]},
   cave:     {label:"Cave",     platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
   chell:    {label:"Chell",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
   burnet:   {label:"Burnet",   platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","badrecovery","quicksilver"]},
-  // ── RK3399 ──
+  // ── RK3399 — EOL ──
   bob:      {label:"Bob",      platform:"RK3399",            arch:"ARM64",  ec:"Cr50", kv:"1–2", subtypes:["kevin","scarlet"], methods:["sh1mmer","badrecovery"]},
   kevin:    {label:"Kevin",    platform:"RK3399",            arch:"ARM64",  ec:"Cr50", kv:"1–2", subtypes:[], methods:["sh1mmer","badrecovery"]},
   scarlet:  {label:"Scarlet",  platform:"RK3399",            arch:"ARM64",  ec:"Cr50", kv:"1–2", subtypes:[], methods:["sh1mmer","legacy"]},
@@ -657,8 +668,8 @@ const BOARD_DB = {
   nyan:     {label:"Nyan",     platform:"NVIDIA Tegra K1",   arch:"ARM",    ec:"H1",   kv:"1",   subtypes:["nyan_big","nyan_blaze"], methods:["legacy"]},
   nyan_big: {label:"Nyan Big", platform:"NVIDIA Tegra K1",   arch:"ARM",    ec:"H1",   kv:"1",   subtypes:[], methods:["legacy"]},
   nyan_blaze:{label:"Nyan Blaze",platform:"NVIDIA Tegra K1", arch:"ARM",    ec:"H1",   kv:"1",   subtypes:[], methods:["legacy"]},
-  zorba:    {label:"Zorba",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
-  banon:    {label:"Banon",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–3", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  zorba:    {label:"Zorba",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–5", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
+  banon:    {label:"Banon",    platform:"AMD Stoney Ridge",  arch:"x86_64", ec:"Cr50", kv:"1–5", subtypes:[], methods:["sh1mmer","badrecovery","legacy","quicksilver"]},
   edgar:    {label:"Edgar",    platform:"Intel Skylake",     arch:"x86_64", ec:"Cr50", kv:"2–3", subtypes:[], methods:["sh1mmer","legacy"]},
   stout:    {label:"Stout",    platform:"Intel Ivy Bridge",  arch:"x86_64", ec:"H1",   kv:"1",   subtypes:[], methods:["legacy"]},
   sumo:     {label:"Sumo",     platform:"Intel Sandy Bridge",arch:"x86_64", ec:"H1",   kv:"1",   subtypes:[], methods:["legacy"]},
@@ -666,22 +677,32 @@ const BOARD_DB = {
   stumpy:   {label:"Stumpy",   platform:"Intel Sandy Bridge",arch:"x86_64", ec:"H1",   kv:"1",   subtypes:[], methods:["legacy"]},
 };
 
-// ── Exploit version cutoffs by kv ──
-// Note: kv does NOT determine which ChromeOS versions a board receives —
-// all supported boards get all versions up to current. kv determines which exploits work.
+// ── Exploit compatibility by kernver ──
+// kv is the tpm_kernver last digit — it increments with ChromeOS version milestones:
+//   kv1 = ≤ R110  |  kv2 = R111–R119  |  kv3 = R120–R124
+//   kv4 = R125–R131  |  kv5 = R132–R137  |  kv6 = R138–R142  |  kv7 = R143+
+// Note: kernskip is common — a device may be on a newer ChromeOS but still show a lower kv.
+// The kv value in the board DB is the RANGE possible from factory to current latest.
 const KV_VERSION_MAP = {
-  "1":   {note:"kv1 (H1/legacy EC). SH1MMER and BadRecovery work on any version. No FWMP enforcement on most of these boards."},
-  "1–2": {note:"kv1–2 (early Cr50). SH1MMER works freely. BadRecovery works on any version for these boards."},
-  "2–3": {note:"kv2–3 (Cr50). SH1MMER + BadRecovery work. Quicksilver covers R125–R142 if on a newer build."},
-  "1–3": {note:"kv1–3 (Cr50/legacy). SH1MMER and BadRecovery work. BR1CK is available if FWMP blocks dev mode. Quicksilver for R125–R142."},
-  "3":   {note:"kv3 (Cr50). SH1MMER works. BadRecovery works. Quicksilver for R125–R142."},
-  "3–4": {note:"kv3–4 (Cr50). SH1MMER works on unkeyrolled devices. BadRecovery works. Quicksilver for R125–R142. If keyrolled (kv4): use BadBr0ker."},
-  "2–4": {note:"kv2–4 (Cr50). SH1MMER, BadRecovery, Quicksilver all viable. If device lands on kv4: BadBr0ker needed."},
-  "4":   {note:"kv4 (keyrolled Cr50). SH1MMER will not boot. Use BadBr0ker (requires Sh1ttyOOBE first) or Quicksilver via Baddieapple."},
-  "5":   {note:"kv5 (keyrolled Cr50/early Ti50). SH1MMER cannot boot. Baddieapple + Quicksilver (≤R142). Sh1ttyOOBE for R133–R137. br0ker works on kv5 only (≤R133)."},
-  "5–6": {note:"kv5–6 (Ti50 / keyrolled). SH1MMER cannot boot. Baddieapple covers Quicksilver (≤R142) and Sh1ttyOOBE (R133–R137). br0ker only on kv5 (≤R133), NOT kv6."},
-  "6":   {note:"kv6 (Ti50, latest keyroll). SH1MMER and br0ker do NOT work. Use Baddieapple + Quicksilver (≤R142) or Sh1ttyExec + Quicksilver."},
-  "7":   {note:"kv7 (Ti50, latest keyroll). No known exploit that works consistently on kv7, wait for sh3ttyexec to chain with Badsh1mmer"},
+  "1":   {note:"kv1 only. This board stays on kv1 regardless of ChromeOS version (H1/legacy EC, no GSC keyroll). SH1MMER and BadRecovery work freely. No FWMP enforcement on most of these boards."},
+  "1–2": {note:"kv1–2. Early Cr50 board. kv1 on R110 and below, kv2 on R111–R119. SH1MMER works on kv1 and kv2. BadRecovery works on kv3 and below — downgrade to ≤R124 to hit kv3."},
+  "1–3": {note:"kv1–3. Cr50 board currently on kv1–3 depending on installed version. kv1 = ≤R110, kv2 = R111–R119, kv3 = R120–R124. SH1MMER, BadRecovery, and BR1CK (if eligible) all work. Quicksilver via SH1MMER for R125–R131 (kv4 on current builds)."},
+  "2–3": {note:"kv2–3. Cr50 board. kv2 on R111–R119, kv3 on R120–R124. SH1MMER works. BadRecovery works on kv3 and below. Quicksilver via SH1MMER for newer builds (R125+ = kv4 on this board)."},
+  "2–4": {note:"kv2–4. Cr50 board. kv2 = R111–R119, kv3 = R120–R124, kv4 = R125–R131. SH1MMER and BadRecovery work on kv3 and below. If currently on kv4 (R125+), use BadBr0ker + Sh1ttyExec, or Quicksilver."},
+  "3":   {note:"kv3 only. Cr50 board, stays at kv3. SH1MMER works. BadRecovery works. Quicksilver for R125+ builds."},
+  "3–4": {note:"kv3–4. Cr50 board. kv3 = R120–R124, kv4 = R125–R131. SH1MMER and BadRecovery work on kv3 (≤R124). If on kv4 (R125+): use Sh1ttyExec + Quicksilver, or BadBr0ker. Downgrade to ≤R124 for SH1MMER/BadRecovery."},
+  "4":   {note:"kv4 only. Keyrolled Cr50. SH1MMER will NOT boot. Downgrade to ≤R124 not possible (firmware rollback check). Use Sh1ttyExec + Quicksilver, or BadBr0ker."},
+  "5":   {note:"kv5 only. Keyrolled Cr50/early Ti50. SH1MMER cannot boot. kv5 = R132–R137. Sh1ttyOOBE for R133–R137, Sh1ttyExec for R138–R142 (if device reaches kv6). br0ker works on kv5 only (≤R132). Baddieapple + Quicksilver covers R125–R142."},
+  "5–6": {note:"kv5–6. Ti50 or keyrolled Cr50. kv5 = R132–R137, kv6 = R138–R142. SH1MMER cannot boot either. Sh1ttyOOBE on R133–R137 (kv5), Sh1ttyExec on R138–R143 (kv6). br0ker only on kv5 (≤R132). Baddieapple + Quicksilver covers kv5 and kv6."},
+  "6":   {note:"kv6 only. Ti50, kv6 = R138–R142. SH1MMER and br0ker do NOT work. Use Sh1ttyExec + Quicksilver, or Baddieapple + Quicksilver. Pencil WP bypass also available."},
+  "1–5": {note:"kv1–5. Cr50 board still receiving updates. Currently on kv1–5 depending on installed ChromeOS. kv1=≤R110, kv2=R111–R119, kv3=R120–R124, kv4=R125–R131, kv5=R132–R137. SH1MMER works freely on kv1–3. If currently kv4+, use Sh1ttyExec + Quicksilver or downgrade."},
+  "1–6": {note:"kv1–6. Active Cr50 board receiving all updates. Check your actual kv in recovery (Tab key). kv1–3 (≤R124): SH1MMER and BadRecovery work freely. kv4 (R125–R131): Sh1ttyExec + Quicksilver. kv5 (R132–R137): Sh1ttyOOBE or Baddieapple. kv6 (R138–R142): Sh1ttyExec + Quicksilver or Baddieapple."},
+  "2–5": {note:"kv2–5. Active Cr50 board. kv2=R111–R119, kv3=R120–R124, kv4=R125–R131, kv5=R132–R137. SH1MMER and BadRecovery work on kv2/kv3. If currently kv4+, use Sh1ttyExec + Quicksilver or downgrade to ≤R124."},
+  "2–6": {note:"kv2–6. Active Cr50 board (AMD Zork/Cezanne family). Check your actual kv. kv2/kv3 (≤R124): SH1MMER and BadRecovery. kv4 (R125–R131): Sh1ttyExec + Quicksilver. kv5/kv6 (R132–R142): Baddieapple + Quicksilver or Sh1ttyOOBE/Sh1ttyExec."},
+  "3–6": {note:"kv3–6. Active Cr50 board (Volteer/Hatch/Dedede/Trogdor etc). Check your actual kv. kv3 (≤R124): SH1MMER and BadRecovery work. kv4 (R125–R131): Sh1ttyExec + Quicksilver. kv5 (R132–R137): Sh1ttyOOBE or Baddieapple. kv6 (R138–R142): Sh1ttyExec + Quicksilver."},
+  "5–7": {note:"kv5–7. Ti50 / keyrolled board on the latest ChromeOS. kv5=R132–R137, kv6=R138–R142, kv7=R143+. Sh1ttyOOBE for kv5 (R133–R137). Sh1ttyExec for kv6 (R138–R142). kv7: no consistent public exploit yet. Baddieapple + Quicksilver works up to kv6 (≤R142)."},
+  "6–7": {note:"kv6–7. Ti50, newest boards. kv6=R138–R142, kv7=R143+. Sh1ttyExec works on kv6 (R138–R142). Baddieapple + Quicksilver also covers kv6. kv7 (R143+): no consistent public exploit yet."},
+  "7":   {note:"kv7. Ti50, R143+. No known consistent public exploit for kv7. Sh1ttyExec patched in R143. Wait for new methods from the community."},
 };
 
 const BOARD_NAMES = Object.keys(BOARD_DB).sort();
@@ -971,6 +992,46 @@ function confirmBoard() {
   showPage(3);
 }
 
+function getRecommended(board, data) {
+  const kvMax = parseInt(data.kv.split('–').pop());
+  const kvMin = parseInt(data.kv.split('–')[0]);
+  const ec = data.ec;
+
+  // kv7 — no working exploit
+  if (kvMax >= 7 && kvMin >= 7) {
+    return `<span style="color:var(--red);">kv7 only — no known public exploit yet.</span> Wait for new community methods. If you can downgrade via recovery USB, check cros.tech for a kv6 (≤R142) build, then use <b>Baddieapple + Quicksilver</b>.`;
+  }
+  // Ti50 boards hitting kv7 (5–7, 6–7)
+  if (ec === 'Ti50' && kvMax >= 7) {
+    return `If currently on <b>kv5/kv6</b> (R132–R142): use <b>Baddieapple + Quicksilver</b>. If on <b>kv7</b> (R143+): no consistent exploit yet. Try downgrading to ≤R142 via recovery USB first. If R133–R142, <b>Sh1ttyExec + Quicksilver</b> also works.`;
+  }
+  // Ti50 kv5–6
+  if (ec === 'Ti50') {
+    return `<b>Baddieapple + Quicksilver</b> is the primary method. On R133–R137 (kv5): <b>Sh1ttyOOBE</b> also works without a USB. On R138–R142 (kv6): use <b>Sh1ttyExec + Quicksilver</b>. Pencil/WP bypass available if software methods fail.`;
+  }
+  // Cr50 heavily keyrolled (kv5–6)
+  if (ec === 'Cr50' && kvMin >= 5) {
+    return `<b>Baddieapple + Quicksilver</b> for R125–R142. On R133–R137: <b>Sh1ttyOOBE</b> works without a USB. On R125+: <b>BadBr0ker</b> available on kv5 (≤R132). Downgrade to ≤R124 via recovery USB to use SH1MMER/BadRecovery on kv3.`;
+  }
+  // Cr50 range including low kv (3–6, 2–6, 1–6 etc)
+  if (ec === 'Cr50' && kvMax >= 5) {
+    return `Check your current kv first (recovery screen → Tab → last digit of tpm_kernver). <b>If kv3 or lower</b>: use <b>SH1MMER</b> — easiest method. <b>If kv4</b> (R125–R131): use <b>Sh1ttyExec + Quicksilver</b> or downgrade to ≤R124. <b>If kv5+</b>: use <b>Baddieapple + Quicksilver</b> or Sh1ttyOOBE/Sh1ttyExec.`;
+  }
+  // Cr50 kv3–4
+  if (ec === 'Cr50' && kvMax >= 4) {
+    return `<b>Check your current kv first.</b> If on <b>kv3 or below</b> (≤R124): <b>SH1MMER</b> is the easiest — boot it and hit Un-Enroll. If on <b>kv4</b> (R125–R131): use <b>Sh1ttyExec + Quicksilver</b>, or downgrade to ≤R124 via recovery USB for SH1MMER/BadRecovery.`;
+  }
+  // Cr50 kv2–3 — mostly unkeyrolled
+  if (ec === 'Cr50' && kvMax <= 3) {
+    return `<b>SH1MMER</b> is the easiest path — download the shim from dl.crosbreaker.dev, flash to USB, boot it, and hit Un-Enroll. If SH1MMER is unavailable for your board, <b>BadRecovery</b> is the fallback. Both work cleanly on kv3 and below.`;
+  }
+  // H1 legacy
+  if (ec === 'H1') {
+    return `Legacy H1 board. Try enabling <b>developer mode directly</b> first (Esc+Refresh+Power → Ctrl+D). If FWMP blocks it, use <b>SH1MMER</b> if a shim exists for your board. Most H1 boards have no FWMP enforcement at all.`;
+  }
+  return `Check your current kv in recovery mode (Tab key), then pick the appropriate method above.`;
+}
+
 function buildPage3(board) {
   const data = BOARD_DB[board];
   if (!data) return;
@@ -1010,6 +1071,19 @@ function buildPage3(board) {
   `;
 
   // Row 2
+  const kvMax = parseInt(kvRaw.split('–').pop());
+  const kvMin = parseInt(kvRaw.split('–')[0]);
+  let keyrollStatus, keyrollSub, keyrollColor;
+  if (data.ec === 'H1') {
+    keyrollStatus = 'Legacy / EOL'; keyrollSub = 'kv1 — no FWMP on most boards'; keyrollColor = 'green';
+  } else if (data.ec === 'Ti50') {
+    keyrollStatus = 'Keyrolled (Ti50)'; keyrollSub = 'SH1MMER cannot boot'; keyrollColor = 'yellow';
+  } else if (kvMax >= 5) {
+    keyrollStatus = 'Keyrolled (Cr50)'; keyrollSub = 'SH1MMER needs downgrade to ≤kv4'; keyrollColor = 'yellow';
+  } else {
+    keyrollStatus = 'Unkeyrolled'; keyrollSub = 'SH1MMER likely works'; keyrollColor = 'green';
+  }
+
   row2el.style.cssText = 'width:100%;max-width:560px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;flex-shrink:0;';
   row2el.innerHTML = `
     <div class="info-card">
@@ -1018,10 +1092,16 @@ function buildPage3(board) {
     </div>
     <div class="info-card">
       <div class="label">Keyroll Status</div>
-      <div class="value ${data.ec === 'Ti50' ? 'yellow' : 'green'}">${data.ec === 'Ti50' ? 'Keyrolled (kv5/6)' : data.kv === '1' ? 'Legacy / EOL' : 'Check in recovery'}</div>
-      <div class="sub-val">${data.ec === 'Ti50' ? 'SH1MMER cannot boot' : 'SH1MMER likely works'}</div>
+      <div class="value ${keyrollColor}">${keyrollStatus}</div>
+      <div class="sub-val">${keyrollSub}</div>
     </div>
   `;
+
+  // Recommended method box
+  const recBox = document.createElement('div');
+  recBox.style.cssText = 'width:100%;max-width:560px;margin-top:10px;flex-shrink:0;background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.25);border-radius:6px;padding:12px 14px;font-size:0.69rem;line-height:1.75;';
+  recBox.innerHTML = `<span style="color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:0.6rem;">Recommended Approach</span><br>${getRecommended(board, data)}`;
+  row2el.after(recBox);
 
   // Subtypes
   const stDiv = document.getElementById('p3subtypes');
