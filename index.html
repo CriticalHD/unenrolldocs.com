@@ -243,15 +243,27 @@
       border: 1px solid rgba(255,255,255,0.1); border-radius: 3px;
     }
 
-    /* VERSION BOX */
+    .rec-badge {
+      display: inline-block; margin-left: 8px; padding: 1px 7px;
+      background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.5);
+      border-radius: 3px; font-size: 0.55rem; color: var(--green);
+      letter-spacing: 1.5px; vertical-align: middle; font-weight: 700;
+    }
+    .method-recommended {
+      border-color: rgba(74,222,128,0.35);
+      box-shadow: 0 0 12px rgba(74,222,128,0.08);
+    }
+    .method-recommended .method-header {
+      background: rgba(74,222,128,0.04);
+    }
+
+    /* VERSION BOX — compact */
     .version-box {
       width: 100%; max-width: 560px; margin-top: 14px;
-      background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.2);
-      border-radius: 6px; padding: 12px 14px;
-      font-size: clamp(0.67rem, 2.6vw, 0.71rem); color: rgba(74,222,128,0.85); line-height: 1.75; flex-shrink: 0;
+      background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+      border-radius: 6px; padding: 10px 14px;
+      flex-shrink: 0; display: flex; align-items: center; gap: 12px;
     }
-    .version-box strong { color: var(--green); }
-    .version-box a { color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(74,222,128,0.3); }
 
     /* SECTION DIVIDER */
     .section-divider {
@@ -992,6 +1004,86 @@ function confirmBoard() {
   showPage(3);
 }
 
+// ── Latest stable ChromeOS version per board (from cros.tech) ──
+// Active boards show current stable; EOL boards show their last version.
+const BOARD_LATEST = {
+  // EOL / H1
+  hana:"R107",   kukui:"R107",  kodama:"R117", kakadu:"R117", kappa:"R117", fennel:"R117", flapjack:"R117", krane:"R117",
+  bob:"R107",    kevin:"R107",  scarlet:"R107",
+  samus:"R96",   veyron:"R96",  cyan:"R107",   elm:"R107",    oak:"R107",
+  clapper:"R100",glimmer:"R100",gnawty:"R100", enguarde:"R100",kip:"R100",winky:"R100",banjo:"R100",candy:"R100",orco:"R100",relm:"R100",swanky:"R100",
+  auron:"R96",   tidus:"R96",   paine:"R96",   yuna:"R96",    gandof:"R96",  lulu:"R96",    lars:"R96",
+  falco:"R96",   peppy:"R96",   leon:"R96",    wolf:"R96",    mccloud:"R96", panther:"R96",
+  daisy:"R90",   snow:"R90",    peach:"R90",   pit:"R90",     pi:"R90",
+  nyan:"R90",    nyan_big:"R90",nyan_blaze:"R90",
+  stout:"R96",   sumo:"R90",    mario:"R90",   stumpy:"R90",
+  // EOL Cr50 Skylake
+  caroline:"R120",cave:"R120",  chell:"R120",  burnet:"R120", edgar:"R120",
+  // Active boards — current stable as of R145/R146
+  octopus:"R145",blooglet:"R145",bobba:"R145",dood:"R145",foob:"R145",garg:"R145",lick:"R145",meowth:"R145",mimrock:"R145",moonrock:"R145",nasher:"R145",orbatrix:"R145",phaser360:"R145",sparky:"R145",sparky360:"R145",ampton:"R145",
+  grunt:"R145",  barla:"R145",  careena:"R145",kasumi:"R145", treeya:"R145", nuwani:"R145",
+  coral:"R145",  astronaut:"R145",babymega:"R145",babytiger:"R145",blacktip:"R145",bruce:"R145",casta:"R145",epaulette:"R145",guard:"R145",laser:"R145",lava:"R145",nasher360:"R145",rabbid:"R145",robo360:"R145",santa:"R145",serpent:"R145",whitetip:"R145",reks:"R145",jacuzzi:"R145",jonquil:"R145",kindred:"R145",kingler:"R145",phaser:"R145",quillback:"R145",starfish:"R145",reef:"R145",sand:"R145",snappy:"R145",pyro:"R145",electro:"R145",
+  zorba:"R145",  banon:"R145",
+  // Kaby Lake / Comet Lake era
+  eve:"R131",    nocturne:"R131",atlas:"R131",  rammus:"R131", shyvana:"R131",
+  nami:"R131",   akali:"R131",  bard:"R131",   ekko:"R131",   sona:"R131",   pantheon:"R131",fizz:"R131",ultima:"R131",
+  // Hatch / Volteer / Tiger Lake (still active)
+  hatch:"R145",  kohaku:"R145", helios:"R145", jinlon:"R145", dratini:"R145",morphius:"R145",
+  volteer:"R145",voxel:"R145",  voema:"R145",  volta:"R145",  volet:"R145",  vorlage:"R145", syndra:"R145",sarien:"R145",vayne:"R145",palkia:"R145",fleex:"R145",drallion:"R145",arcada:"R145",akemi:"R145",wahoo:"R145",
+  // Qualcomm Trogdor
+  trogdor:"R145",lazor:"R145",  limozeen:"R145",pompom:"R145",wormdingler:"R145",coachz:"R145",mrbossian:"R145",quackingstick:"R145",puff:"R145",dragonair:"R145",strongbad:"R145",kingoftown:"R145",homestar:"R145",
+  // MTK Asurada/Cherry
+  asurada:"R145",hayato:"R145", cherry:"R145", tomato:"R145", damu:"R145",   myst:"R145",
+  corsola:"R145",magneton:"R145",dojo:"R145",
+  // Dedede
+  dedede:"R145", metaknight:"R145",waddledoo:"R145",shredder:"R145",lillipup:"R145",nightfury:"R145",steelix:"R145",tentacruel:"R145",walrein:"R145",madoo:"R145",tiger:"R145",zako:"R145",
+  // Zork / Cezanne
+  zork:"R145",   dalboz:"R145", dirinboz2:"R145",ezkinil:"R145",gooey:"R145",woomax:"R145",zorro:"R145",
+  // Brya / Nissa / Guybrush / Skyrim / Rex
+  brya:"R146",   felwinter:"R146",primus:"R146",taeko:"R146",  craask:"R146", crota:"R146",  brask:"R146",  lismore:"R146",dirinboz:"R146",berknip:"R146",
+  nissa:"R146",  pujjo:"R146",  pujjo1e:"R131",pujjocento:"R146",pujjoga:"R146",pujjogatwin:"R146",pujjolo:"R146",pujjoniru:"R146",pujjoquince:"R146",pujjoteen:"R146",pujjoteenlo:"R146",
+  guybrush:"R146",skyrim:"R146",vilboz:"R146", nipperkin:"R146",jelboz:"R146",jelboz64:"R146",kasumi360:"R146",
+  rex:"R146",    geralt:"R146", staryu:"R146",
+};
+
+// ── Returns the single best method key for a board ──
+function getRecommendedKey(board, data) {
+  const ec = data.ec;
+  const kvMax = parseInt(data.kv.split('–').pop());
+  const kvMin = parseInt(data.kv.split('–')[0]);
+  const methods = data.methods;
+  const has = k => methods.includes(k);
+
+  if (ec === 'H1') return has('legacy') ? 'legacy' : methods[0];
+  if (ec === 'Ti50') {
+    // kv7 only — no good option, pencil is the only hardware path
+    if (kvMin >= 7) return has('pencil') ? 'pencil' : methods[0];
+    // kv5/6/7 — sh1ttyexec if available, else baddieapple
+    if (has('sh1ttyexec')) return 'sh1ttyexec';
+    if (has('baddieapple')) return 'baddieapple';
+    return methods[0];
+  }
+  // Cr50
+  if (kvMax <= 3) {
+    if (has('sh1mmer')) return 'sh1mmer';
+    if (has('badrecovery')) return 'badrecovery';
+  }
+  if (kvMax === 4) {
+    if (has('sh1ttyexec')) return 'sh1ttyexec';
+    if (has('quicksilver')) return 'quicksilver';
+  }
+  if (kvMax >= 5) {
+    if (has('sh1ttyexec')) return 'sh1ttyexec';
+    if (has('baddieapple')) return 'baddieapple';
+    if (has('quicksilver')) return 'quicksilver';
+  }
+  // Wide range boards — pick smartest default
+  if (kvMin <= 3 && kvMax >= 4) {
+    if (has('sh1mmer')) return 'sh1mmer'; // works on low kv, user should check first
+  }
+  return methods[0];
+}
+
 function getRecommended(board, data) {
   const kvMax = parseInt(data.kv.split('–').pop());
   const kvMin = parseInt(data.kv.split('–')[0]);
@@ -1097,11 +1189,7 @@ function buildPage3(board) {
     </div>
   `;
 
-  // Recommended method box
-  const recBox = document.createElement('div');
-  recBox.style.cssText = 'width:100%;max-width:560px;margin-top:10px;flex-shrink:0;background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.25);border-radius:6px;padding:12px 14px;font-size:0.69rem;line-height:1.75;';
-  recBox.innerHTML = `<span style="color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:0.6rem;">Recommended Approach</span><br>${getRecommended(board, data)}`;
-  row2el.after(recBox);
+  // Recommended method box — removed, shown inline in method list instead
 
   // Subtypes
   const stDiv = document.getElementById('p3subtypes');
@@ -1112,32 +1200,35 @@ function buildPage3(board) {
     stDiv.innerHTML = '';
   }
 
-  // Version range box
+  // Latest version box
   const versionBox = document.getElementById('p3versions');
-  const vmap = KV_VERSION_MAP[data.kv] || {};
-  versionBox.innerHTML = `<strong>Exploit compatibility for ${board}:</strong><br><span style="color:rgba(74,222,128,0.65);font-size:0.68rem;">${vmap.note || 'Check cros.tech for version-specific exploit support.'}</span><br><span style="font-size:0.65rem;color:rgba(255,255,255,0.35);margin-top:4px;display:inline-block;">Browse all available ChromeOS builds → <a href="https://cros.tech/board/${board}" target="_blank">cros.tech/board/${board}</a></span>`;
+  const latestVer = BOARD_LATEST[board] || BOARD_LATEST[data.ec === 'Ti50' ? '_ti50' : data.ec === 'H1' ? '_h1' : '_cr50'] || '—';
+  versionBox.innerHTML = `<strong style="color:var(--dim);font-size:0.6rem;letter-spacing:1.5px;text-transform:uppercase;">Latest ChromeOS Version</strong><br><span style="font-size:1.1rem;color:var(--fg);font-weight:700;">${latestVer}</span><span style="font-size:0.65rem;color:rgba(255,255,255,0.35);margin-left:10px;">Browse all → <a href="https://cros.tech/board/${board}" target="_blank" style="color:var(--blue);border-bottom:1px solid rgba(96,165,250,0.3);">cros.tech</a></span>`;
 
   // Methods
   const list = document.getElementById('methodsList');
   list.innerHTML = '';
+  const recKey = getRecommendedKey(board, data);
   data.methods.forEach((mKey, i) => {
     const m = METHODS[mKey];
     if (!m) return;
+    const isRec = mKey === recKey;
     const card = document.createElement('div');
-    card.className = 'method-card';
+    card.className = 'method-card' + (isRec ? ' method-recommended' : '');
     const dlHtml = m.dlUrl
       ? `<a class="dl-btn" href="https://dl.crosbreaker.dev/recovery-images/${board}" target="_blank">↓ Download Recovery Image</a>`
       : '';
     const stepsHtml = m.steps.map(s => `<li>${s}</li>`).join('');
+    const recBadge = isRec ? `<span class="rec-badge">RECOMMENDED</span>` : '';
     card.innerHTML = `
       <div class="method-header" onclick="toggleAccordion(this)">
-        <span class="method-name">${m.name}</span>
+        <span class="method-name">${m.name}${recBadge}</span>
         <span style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
           <span class="method-tag ${m.tag}">${m.difficulty}</span>
           <span class="chevron">▾</span>
         </span>
       </div>
-      <div class="method-body${i===0?' open':''}">
+      <div class="method-body${isRec ? ' open' : ''}">
         <p>${m.desc}</p>
         <div class="method-compat">${m.compat}</div>
         <ol style="margin-top:12px">${stepsHtml}</ol>
